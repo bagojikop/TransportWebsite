@@ -1,0 +1,252 @@
+/* company-details.component.scss */
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container-fluid {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Left Side - Information (Same as other forms) */
+.info-panel {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-content {
+  max-width: 400px;
+  width: 100%;
+}
+
+.info-title {
+  color: #bbdefb;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.info-text {
+  color: #e3f2fd;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.info-list {
+  list-style-type: none;
+  padding-left: 0;
+  color: #c5cae9;
+}
+
+.info-list li {
+  padding-left: 1.2rem;
+  position: relative;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.info-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #64b5f6;
+}
+
+.benefit-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border-left: 3px solid #4caf50;
+}
+
+/* Right Side - Form (Same style as other forms) */
+.form-panel {
+  background-color: #f8f9fa;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+/* Form Elements - SAME SIZES as other forms */
+.form-label {
+  color: #495057;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.form-control, .form-control-sm, .form-select-sm {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  height: 32px;
+}
+
+.form-control:focus, .form-select-sm:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control.is-invalid, .form-select-sm.is-invalid {
+  border-color: #dc3545;
+}
+
+textarea.form-control-sm {
+  height: auto;
+  min-height: 60px;
+}
+
+.input-group-sm > .form-control,
+.input-group-sm > .btn,
+.input-group-sm > .input-group-text {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  height: 30px;
+}
+
+.input-group-text {
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  font-size: 0.8rem;
+}
+
+/* Select dropdown */
+.form-select-sm {
+  padding: 4px 24px 4px 8px;
+  background-position: right 8px center;
+  background-size: 12px;
+}
+
+/* Buttons - SAME SIZES as other forms */
+.btn {
+  border-radius: 4px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-success:disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Alerts - SAME SIZES as other forms */
+.alert {
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border: none;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Row spacing */
+.row.g-2 {
+  --bs-gutter-x: 0.5rem;
+  --bs-gutter-y: 0.5rem;
+}
+
+.row.g-0 {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+}
+
+/* Footer */
+.footer-info {
+  font-size: 0.7rem;
+}
+
+.footer-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-panel {
+    display: none !important;
+  }
+  
+  .form-panel {
+    padding: 10px;
+  }
+  
+  .card {
+    max-width: 350px;
+    padding: 15px;
+  }
+  
+  .col-md-4, .col-md-6 {
+    margin-bottom: 8px;
+  }
+}
+
+/* Ensure no horizontal scroll */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}

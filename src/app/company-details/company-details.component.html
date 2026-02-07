@@ -1,0 +1,257 @@
+<div class="container-fluid p-0">
+  <div class="row g-0 min-vh-100">
+    <!-- Left Side - Information -->
+    <div class="col-md-6 d-none d-md-flex info-panel">
+      <div class="info-content p-4">
+        <h5 class="mb-3">Company Information</h5>
+        
+        <div class="info-section mb-3">
+          <h6 class="info-title">🏢 Company Details</h6>
+          <p class="info-text small">Enter your transport company's official business details for registration and compliance.</p>
+        </div>
+
+        <div class="info-section mb-3">
+          <h6 class="info-title">📍 Address Details</h6>
+          <p class="info-text small">Registered office address including state, place, and PIN code for official correspondence.</p>
+        </div>
+
+        <div class="info-section mb-3">
+          <h6 class="info-title">📞 Contact Information</h6>
+          <p class="info-text small">Primary contact details for business communications and customer support.</p>
+        </div>
+
+        <div class="info-section mb-3">
+          <h6 class="info-title">📄 Legal & Compliance</h6>
+          <ul class="info-list small">
+            <li>Jurisdiction for GST purposes</li>
+            <li>Transporter ID (if applicable)</li>
+            <li>PAN Number (10 character format)</li>
+            <li>All details should match official documents</li>
+          </ul>
+        </div>
+
+        <div class="benefit-box mt-4 p-3">
+          <h6 class="info-title">✅ Why This Matters</h6>
+          <p class="info-text small mb-0">Accurate company details ensure proper GST invoicing, e-way bills, and compliance with transport regulations.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Form -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center form-panel">
+      <div class="card shadow-sm border-0 p-3 mx-2" style="width: 100%; max-width: 450px;">
+        <div class="text-center mb-3">
+          <h5 class="fw-bold mb-1">Company Details</h5>
+          <p class="text-muted small mb-0">Enter your transport company information</p>
+        </div>
+
+        <form [formGroup]="companyForm" (ngSubmit)="submitCompany()">
+
+          <!-- Firm Name & Short Name -->
+          <div class="row g-2 mb-2">
+            <div class="col-md-6">
+              <label class="form-label small fw-medium">Firm Name *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="firmName"
+                [ngClass]="{'is-invalid': companyForm.get('firmName')?.touched && companyForm.get('firmName')?.invalid}"
+                placeholder="Legal business name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-medium">Short Name *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="shortName"
+                [ngClass]="{'is-invalid': companyForm.get('shortName')?.touched && companyForm.get('shortName')?.invalid}"
+                placeholder="Display name">
+            </div>
+          </div>
+          <div class="row g-0 mb-2">
+            <div class="col-md-6">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('firmName')?.touched && companyForm.get('firmName')?.invalid">
+                Required
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('shortName')?.touched && companyForm.get('shortName')?.invalid">
+                Required
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-2">
+            <label class="form-label small fw-medium">Address *</label>
+            <textarea class="form-control form-control-sm" rows="2" formControlName="address"
+              [ngClass]="{'is-invalid': companyForm.get('address')?.touched && companyForm.get('address')?.invalid}"
+              placeholder="Complete business address"></textarea>
+            <div class="invalid-feedback small" 
+              *ngIf="companyForm.get('address')?.touched && companyForm.get('address')?.invalid">
+              Required
+            </div>
+          </div>
+
+          <!-- State, Place, PIN Code -->
+          <div class="row g-2 mb-2">
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">State *</label>
+              <select class="form-select form-select-sm" formControlName="state"
+                [ngClass]="{'is-invalid': companyForm.get('state')?.touched && companyForm.get('state')?.invalid}">
+                <option value="">Select State</option>
+                <option *ngFor="let s of states" [value]="s">{{ s }}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Place *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="place"
+                [ngClass]="{'is-invalid': companyForm.get('place')?.touched && companyForm.get('place')?.invalid}"
+                placeholder="City/Town">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">PIN Code *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="pinCode"
+                [ngClass]="{'is-invalid': companyForm.get('pinCode')?.touched && companyForm.get('pinCode')?.invalid}"
+                placeholder="6 digits" maxlength="6">
+            </div>
+          </div>
+          <div class="row g-0 mb-2">
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('state')?.touched && companyForm.get('state')?.invalid">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('place')?.touched && companyForm.get('place')?.invalid">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('pinCode')?.touched && companyForm.get('pinCode')?.invalid">
+                Valid 6-digit PIN required
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone, Mobile, Email -->
+          <div class="row g-2 mb-2">
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Phone</label>
+              <input type="text" class="form-control form-control-sm" formControlName="phoneNumber"
+                placeholder="Landline">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Mobile *</label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-text">+91</span>
+                <input type="text" class="form-control" formControlName="mobileNumber"
+                  [ngClass]="{'is-invalid': companyForm.get('mobileNumber')?.touched && companyForm.get('mobileNumber')?.invalid}"
+                  placeholder="10 digits" maxlength="10">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Email *</label>
+              <input type="email" class="form-control form-control-sm" formControlName="email"
+                [ngClass]="{'is-invalid': companyForm.get('email')?.touched && companyForm.get('email')?.invalid}"
+                placeholder="business@email.com">
+            </div>
+          </div>
+          <div class="row g-0 mb-2">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('mobileNumber')?.touched && companyForm.get('mobileNumber')?.invalid">
+                Valid 10-digit mobile required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('email')?.touched && companyForm.get('email')?.invalid">
+                Valid email required
+              </div>
+            </div>
+          </div>
+
+          <!-- Jurisdiction, Transporter ID, PAN -->
+          <div class="row g-2 mb-3">
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Jurisdiction *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="jurisdiction"
+                [ngClass]="{'is-invalid': companyForm.get('jurisdiction')?.touched && companyForm.get('jurisdiction')?.invalid}"
+                placeholder="GST jurisdiction">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">Transporter ID *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="transporterId"
+                [ngClass]="{'is-invalid': companyForm.get('transporterId')?.touched && companyForm.get('transporterId')?.invalid}"
+                placeholder="Transport license">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-medium">PAN Number *</label>
+              <input type="text" class="form-control form-control-sm" formControlName="panNumber"
+                [ngClass]="{'is-invalid': companyForm.get('panNumber')?.touched && companyForm.get('panNumber')?.invalid}"
+                placeholder="ABCDE1234F" maxlength="10">
+            </div>
+          </div>
+          <div class="row g-0 mb-3">
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('jurisdiction')?.touched && companyForm.get('jurisdiction')?.invalid">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('transporterId')?.touched && companyForm.get('transporterId')?.invalid">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="invalid-feedback small d-block" 
+                *ngIf="companyForm.get('panNumber')?.touched && companyForm.get('panNumber')?.invalid">
+                Valid PAN format required
+              </div>
+            </div>
+          </div>
+
+          <!-- Status Message -->
+          <div *ngIf="formMessage" class="alert alert-info p-2 mb-2 small">
+            <i class="fas fa-info-circle me-1"></i> {{formMessage}}
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-success w-100 py-2 btn-sm" [disabled]="companyForm.invalid || isLoading">
+            <span *ngIf="!isLoading">
+              <i class="fas fa-save me-1"></i>Save Company Details
+            </span>
+            <span *ngIf="isLoading">
+              <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+              Saving...
+            </span>
+          </button>
+
+          <!-- Success/Error Message -->
+          <div *ngIf="successMessage" class="alert alert-success mt-2 p-2 small">
+            <i class="fas fa-check-circle me-1"></i> {{successMessage}}
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-2 p-2 small">
+            <i class="fas fa-exclamation-triangle me-1"></i> {{errorMessage}}
+          </div>
+
+          <!-- Back Button -->
+          <button type="button" class="btn btn-outline-secondary w-100 mt-2 btn-sm" (click)="goBack()">
+            <i class="fas fa-arrow-left me-1"></i>Back to User Details
+          </button>
+        </form>
+
+        <!-- Footer Info -->
+        <div class="footer-info text-center mt-3 pt-2 border-top small">
+          <small class="text-muted">
+            Ensure all details match official documents • 
+            <a href="#" class="text-decoration-none">Need help?</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

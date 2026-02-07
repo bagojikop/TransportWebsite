@@ -1,0 +1,354 @@
+<!-- Header -->
+<header #header id="header">
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo" (click)="scrollToTop()">
+        <i class="fas fa-truck-moving"></i>
+        <span class="logo-text">DSS ERP</span>
+      </div>
+      <ul class="nav-links" #navLinks [class.active]="mobileMenuOpen">
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('hero')"
+            class="nav-link"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('features')"
+            class="nav-link"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('how-it-works')"
+            class="nav-link"
+            >How It Works</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('pricing')"
+            class="nav-link"
+            >Pricing</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('demo')"
+            class="nav-link"
+            >Demo</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            (click)="scrollToSection('contact')"
+            class="nav-link"
+            >Contact</a
+          >
+        </li>
+      </ul>
+      <button class="cta-button" routerLink="/tenant-form">
+        <i class="fas fa-play-circle"></i> Free Demo
+      </button>
+      <div class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <i
+          class="fas"
+          [class.fa-bars]="!mobileMenuOpen"
+          [class.fa-times]="mobileMenuOpen"
+        ></i>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Transport Management & <span>Accounting Solution</span></h1>
+        <p class="hero-subtitle">
+          DSSERP is an all-in-one ERP for Distribution and Logistics transport businesses,
+          managing everything from booking and lorry receipts to freight
+          settlement, GST, TDS, accounting, and compliance—seamlessly.
+        </p>
+
+        <div class="hero-bullets">
+          <div class="hero-bullet">
+            <i class="fas fa-check-circle"></i>
+            <span>Built specially for  Distribution and Logistics Transporters</span>
+          </div>
+          <div class="hero-bullet">
+            <i class="fas fa-check-circle"></i>
+            <span>Handles small parcels to 20+ MT consignments</span>
+          </div>
+          <div class="hero-bullet">
+            <i class="fas fa-check-circle"></i>
+            <span>Fully GST, e-Invoice, e-Way Bill & TDS compliant</span>
+          </div>
+          <div class="hero-bullet">
+            <i class="fas fa-check-circle"></i>
+            <span>Integrated Accounting & Reporting up to Balance Sheet</span>
+          </div>
+          <div class="hero-bullet">
+            <i class="fas fa-check-circle"></i>
+            <span>Digital communication via Email & WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="hero-buttons">
+          <button
+            class="btn btn-primary"
+            (click)="onCtaButtonClick('ctaHeroButton', $event)"
+            routerLink="/tenant-form"
+          >
+            <i class="fas fa-rocket"></i> Start Free Trial
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="onCtaButtonClick('videoButton', $event)"
+          >
+            <i class="fas fa-play"></i> Watch Demo (3 min)
+          </button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img
+          src="../../assets/banner.jpg"
+          alt="TransportPro ERP Dashboard"
+          #heroImage
+          (mouseenter)="onHeroImageHover(true)"
+          (mouseleave)="onHeroImageHover(false)"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Features Section -->
+<section class="section core-features" id="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>Core Transport Management Features</h2>
+      <p>
+        Everything you need to run your transport business efficiently - no
+        unnecessary extras.
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of coreFeatures">
+        <div class="feature-icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-title">
+      <h2>How  DSSERP Works</h2>
+      <p>Simple setup. Easy to use. Designed for transport businesses.</p>
+    </div>
+
+    <div class="steps-container">
+      <div class="step" *ngFor="let step of steps">
+        <div class="step-number">{{ step.number }}</div>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<!-- Pricing Section -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="section-title">
+      <h2>Simple, Transparent Pricing</h2>
+      <p>Payment must be made yearly in advance.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div
+        class="pricing-card"
+        [class.popular]="plan.popular"
+        *ngFor="let plan of pricingPlans"
+      >
+        <div class="popular-badge" *ngIf="plan.popular">Most Popular</div>
+
+        <div class="pricing-header">
+          <div class="pricing-name">{{ plan.name }}</div>
+          <div class="pricing-users">{{ plan.users }}</div>
+          <div class="pricing-price">
+            {{ plan.price }}<span class="pricing-period">/month</span>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          (click)="onPlanButtonClick(plan.name, $event)"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+
+    <!-- Add-On Facilities -->
+    <div class="addon-section">
+      <div class="addon-title">Add-On Facilities</div>
+
+      <div class="addon-grid">
+        <div class="addon-item">
+          <i class="fas fa-file-invoice"></i>
+          <span>E-Invoice</span>
+        </div>
+
+        <div class="addon-item">
+          <i class="fas fa-truck"></i>
+          <span>E-Way Bill</span>
+        </div>
+
+        <div class="addon-item">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp Integration<br /><small>Unlimited Messages</small></span>
+        </div>
+
+        <div class="addon-item">
+          <i class="fas fa-envelope"></i>
+          <span>Email Services</span>
+        </div>
+      </div>
+
+      <div class="addon-price">
+        ₹250 per user / month
+      </div>
+
+      <div class="addon-note">
+        Add-ons are billed yearly in advance<br />
+        WhatsApp charges as per provider rates
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA Section -->
+<section class="cta-section" id="demo">
+  <div class="container">
+    <h2>Ready to Simplify Your Transport Business?</h2>
+    
+
+    <div class="cta-buttons">
+      <button
+        class="btn btn-primary cta-button-main"
+        (click)="onCtaButtonClick('finalCtaButton', $event)"
+         routerLink="/tenant-form"
+      >
+        <i class="fas fa-play-circle"></i> Start Free 30-Day Trial
+      </button>
+      <button
+        class="btn btn-secondary cta-button-alt"
+        (click)="onScheduleButtonClick('callButton', $event)"
+      >
+         Schedule a Demo
+      </button>
+    </div>
+
+    <div class="cta-footer">
+      <i class="fas fa-lock"></i> Your data is secure • No credit card required
+      for trial
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-about">
+        <div class="footer-logo" (click)="scrollToTop()">
+          <i class="fas fa-truck-moving"></i> DSSERP
+        </div>
+        <p>
+          Transport management software designed exclusively for transport
+          businesses. Focused on billing, operations, and administration.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Product</h3>
+        <ul>
+          <li *ngFor="let link of productLinks">
+            <a
+              href="javascript:void(0)"
+              (click)="scrollToSection(link.link.substring(1))"
+              >{{ link.name }}</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h3>Company</h3>
+        <ul>
+          <li *ngFor="let link of companyLinks">
+            <a href="#">{{ link.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h3>Contact</h3>
+        <ul>
+          <li>
+            <i class="fas fa-map-marker-alt"></i> Sangli,Maharashtra,India
+          </li>
+          <li><i class="fas fa-phone"></i> 91 8805011007</li>
+          <li><i class="fas fa-envelope"></i> info@dsserp.com</li>
+          <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM </li>
+        </ul>
+      </div>
+    </div>
+
+    
+  </div>
+</footer>
+
+<a
+  href="https://wa.me/message/BGDPLKZ3VDV3N1"
+  target="_blank"
+  class="whatsapp-float"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="fab fa-whatsapp"></i>
+</a>
+

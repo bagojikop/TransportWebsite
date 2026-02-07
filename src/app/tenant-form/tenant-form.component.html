@@ -1,0 +1,143 @@
+<div class="container-fluid p-0">
+  <div class="row g-0 min-vh-100">
+    <!-- Left Side - Information -->
+    <div class="col-md-6 d-none d-md-flex info-panel">
+      <div class="info-content p-4">
+        <h5 class="mb-3">DSS ERP Information</h5>
+        
+        <div class="info-section mb-3">
+          <h6 class="info-title">📋 Company Name</h6>
+          <p class="info-text small">Your business legal name for billing and communication.</p>
+        </div>
+
+        <div class="info-section mb-3">
+          <h6 class="info-title">🌐 Sub Domain</h6>
+          <p class="info-text small">Unique URL for your ERP instance (lowercase, numbers, hyphens).</p>
+        </div>
+
+        <div class="info-section mb-3">
+          <h6 class="info-title">🔑 License Key</h6>
+          <p class="info-text small">Activation code. Use demo key for 1 month free trial.</p>
+          <div class="mt-2">
+            <code class="demo-key">VALID-KEY-1234</code>
+            <small class="text-light ms-2">Demo Key</small>
+          </div>
+        </div>
+
+        <div class="benefit-box mt-4 p-3">
+          <h6 class="info-title">🎁 1 Month Free Trial</h6>
+          <p class="info-text small mb-0">Use demo key to get full access for 30 days.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Form (EXACT ORIGINAL SIZE) -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center form-panel">
+      <div class="card shadow-sm border-0 p-3 mx-2" style="width: 100%; max-width: 400px;">
+        <div class="text-center mb-3">
+          <h5 class="fw-bold mb-1">Tenant Registration</h5>
+          <p class="text-muted small mb-0">Enter your organization details</p>
+        </div>
+
+        <form [formGroup]="tenantForm" (ngSubmit)="verifyTenant()">
+          
+          <!-- Company Name -->
+          <div class="mb-2">
+            <label class="form-label small fw-medium">Company Name *</label>
+            <input type="text" formControlName="companyName" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': t['companyName'].touched && t['companyName'].invalid}"
+              placeholder="Enter company name">
+            <div class="invalid-feedback small" *ngIf="t['companyName'].touched && t['companyName'].errors?.['required']">
+              Required
+            </div>
+            <div class="invalid-feedback small" *ngIf="t['companyName'].touched && t['companyName'].errors?.['minlength']">
+              Min 2 characters
+            </div>
+          </div>
+
+          <!-- Sub Domain -->
+          <div class="mb-2">
+            <label class="form-label small fw-medium">Sub Domain *</label>
+            <div class="input-group input-group-sm">
+              <input type="text" formControlName="subDomain" class="form-control"
+                [ngClass]="{'is-invalid': t['subDomain'].touched && t['subDomain'].invalid}"
+                placeholder="your-company">
+              <span class="input-group-text bg-light small">.veererp.com</span>
+            </div>
+            <div class="invalid-feedback small" *ngIf="t['subDomain'].touched && t['subDomain'].invalid">
+              Lowercase letters, numbers, hyphens only
+            </div>
+          </div>
+
+          <!-- License Key -->
+          <div class="mb-3">
+            <label class="form-label small fw-medium">License Key *</label>
+            <div class="input-group input-group-sm">
+              <input type="text" formControlName="licenseKey" class="form-control"
+                [ngClass]="{'is-invalid': t['licenseKey'].touched && t['licenseKey'].invalid}"
+                placeholder="Enter license key">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="pasteKey()">
+                Paste
+              </button>
+            </div>
+            <div class="invalid-feedback small" *ngIf="t['licenseKey'].touched && t['licenseKey'].invalid">
+              Valid key required
+            </div>
+            
+            <!-- Demo Key Section -->
+            <div class="demo-key-box mt-2 p-2 border rounded bg-light">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <small class="text-muted d-block">Demo Key (1 Month Free):</small>
+                  <code class="demo-key small">VALID-KEY-1234</code>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-sm btn-outline-primary me-1" (click)="copyDemoKey()">
+                    Copy
+                  </button>
+                  <button type="button" class="btn btn-sm btn-success" (click)="useDemoKey()">
+                    Use
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Status Message -->
+          <div *ngIf="formMessage" class="alert alert-info p-2 mb-2 small">
+            <i class="fas fa-info-circle me-1"></i> {{formMessage}}
+          </div>
+
+          <!-- Verify Button -->
+          <button type="submit" class="btn btn-primary w-100 py-2 btn-sm" [disabled]="!tenantForm.valid || isLoading">
+            <span *ngIf="!isLoading">
+              <i class="fas fa-check me-1"></i>Verify & Continue
+            </span>
+            <span *ngIf="isLoading">
+              <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+              Verifying...
+            </span>
+          </button>
+
+          <!-- Error Message -->
+          <div *ngIf="tenantMessage" class="alert alert-danger mt-2 p-2 small">
+            <i class="fas fa-exclamation-triangle me-1"></i> {{tenantMessage}}
+          </div>
+
+          <!-- Clear Button -->
+          <button type="button" class="btn btn-outline-secondary w-100 mt-2 btn-sm" (click)="resetForm()">
+            Clear Form
+          </button>
+        </form>
+
+        <!-- Footer Info -->
+        <div class="footer-info text-center mt-3 pt-2 border-top small">
+          <small class="text-muted">
+            Need help? <a href="#" class="text-decoration-none">Support</a> • 
+            Buy license <a href="#" class="text-decoration-none">Purchase</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
