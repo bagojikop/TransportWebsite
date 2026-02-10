@@ -9,6 +9,9 @@ import { HomeComponent } from './home/home.component';
 import { TenantFormComponent } from './tenant-form/tenant-form.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import {  RegisterComponent } from './Register/register.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { RegisterSuccessComponent } from './register-success/register-success.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     TenantFormComponent,
     UserDetailsComponent,
     CompanyDetailsComponent,
+    RegisterComponent,
+    RegisterSuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,7 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     ReactiveFormsModule // <-- Add this to imports array
 
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

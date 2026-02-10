@@ -1,0 +1,181 @@
+<div class="container-fluid p-0">
+  <div class="row g-0 min-vh-100">
+    <!-- Left Side - Software Information -->
+    <div class="col-md-6 d-none d-md-flex info-panel">
+      <div class="info-content p-4">
+        <div class="software-header mb-4">
+          <h4 class="fw-bold mb-2">DSS ERP</h4>
+          <p class="info-text">All-in-One Transport Management System</p>
+        </div>
+        
+        <div class="feature-list mb-4">
+          <div class="feature-item mb-3">
+            <div class="feature-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div>
+              <h6 class="info-title">Transport ERP</h6>
+              <p class="info-text small">Complete solution for retail & bulk transporters</p>
+            </div>
+          </div>
+          
+          <div class="feature-item mb-3">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div>
+              <h6 class="info-title">GST Compliant</h6>
+              <p class="info-text small">e-Invoice, e-Way Bill & TDS compliance built-in</p>
+            </div>
+          </div>
+          
+          <div class="feature-item mb-3">
+            <div class="feature-icon">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <div>
+              <h6 class="info-title">Accounting</h6>
+              <p class="info-text small">Integrated accounting up to balance sheet</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-box p-3 rounded mb-4">
+          <h6 class="info-title mb-2">Why Choose DSS ERP?</h6>
+          <div class="row">
+            <div class="col-6 mb-2">
+              <div class="stat-number">1000+</div>
+              <div class="stat-label small">Clients</div>
+            </div>
+            <div class="col-6 mb-2">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label small">Support</div>
+            </div>
+            <div class="col-6">
+              <div class="stat-number">99%</div>
+              <div class="stat-label small">Uptime</div>
+            </div>
+            <div class="col-6">
+              <div class="stat-number">All India</div>
+              <div class="stat-label small">Coverage</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="testimonial-box p-3 rounded">
+          <p class="info-text small italic mb-2">"DSS ERP transformed our transport business. From booking to billing, everything in one place."</p>
+          <div class="author small">- Rajesh Transport, Mumbai</div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center form-panel">
+      <div class="card shadow-sm border-0 p-3 mx-2" style="width: 100%; max-width: 400px;">
+        <div class="text-center mb-4">
+          <div class="logo mb-3">
+            <h3 class="fw-bold text-primary mb-1">DSS ERP</h3>
+            <p class="text-muted small mb-0">Transport Management System</p>
+          </div>
+          <!-- <h5 class="fw-bold mb-1">Welcome Back</h5>
+          <p class="text-muted small mb-0">Sign in to your account</p> -->
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label small fw-medium">Full Name *</label>
+            <input type="text" formControlName="customerName" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': f['customerName'].touched && f['customerName'].invalid}"
+              placeholder="Enter your full name">
+            <div class="invalid-feedback small" *ngIf="f['customerName'].touched && f['customerName'].errors?.['required']">
+              Full name is required
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label small fw-medium">Email *</label>
+            <input type="email" formControlName="email" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}"
+              placeholder="you@example.com">
+            <div class="invalid-feedback small" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+              Email is required
+            </div>
+            <div class="invalid-feedback small" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+              Enter a valid email address
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="mb-3">
+            <label class="form-label small fw-medium">Mobile Number *</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">+91</span>
+              <input type="text" formControlName="phone" class="form-control"
+                [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].invalid}"
+                placeholder="9876543210" maxlength="10">
+            </div>
+            <div class="invalid-feedback small" *ngIf="f['phone'].touched && f['phone'].errors?.['required']">
+              Mobile number is required
+            </div>
+            <div class="invalid-feedback small" *ngIf="f['phone'].touched && f['phone'].errors?.['pattern']">
+              Enter a valid 10-digit mobile number
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label class="form-label small fw-medium">Password *</label>
+            <div class="input-group input-group-sm">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
+                [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}"
+                placeholder="Create password">
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+                <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback small" *ngIf="f['password'].touched && f['password'].errors?.['required']">
+              Password is required
+            </div>
+            <div class="invalid-feedback small" *ngIf="f['password'].touched && f['password'].errors?.['minlength']">
+              Minimum 6 characters required
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <!-- <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="remember" formControlName="rememberMe">
+              <label class="form-check-label small" for="remember">Remember me</label>
+            </div>
+            <a href="#" class="small text-decoration-none text-primary">Forgot Password?</a>
+          </div> -->
+
+          <!-- Status Message -->
+          <div *ngIf="formMessage" class="alert alert-info p-2 mb-3 small" [ngClass]="{'alert-danger': isError}">
+            <i class="fas" [class.fa-info-circle]="!isError" [class.fa-exclamation-triangle]="isError"></i>
+            {{formMessage}}
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100 py-2 btn-sm"   [disabled]="!registerForm.valid || isLoading">
+            <span *ngIf="!isLoading">
+              <i class="fas fa-sign-in-alt me-1"></i>Sign Up
+            </span>
+            <span *ngIf="isLoading">
+              <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+              Signing up...
+            </span>
+          </button>
+
+          
+        </form>
+
+     
+       
+      </div>
+    </div>
+  </div>
+</div>
