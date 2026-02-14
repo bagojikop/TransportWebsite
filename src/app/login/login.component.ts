@@ -38,8 +38,8 @@ export class LoginComponent {
     const entity = this.loginForm.value;
 
     this.http.post(`${environment.API_URL}register/login`, entity).subscribe({
-      next: (response) => {
-         this.authService.setUser(response);
+      next: (response:any) => {
+         this.authService.setUser(response.data);
         
           this.isError = false;
           this.formMessage = '';
