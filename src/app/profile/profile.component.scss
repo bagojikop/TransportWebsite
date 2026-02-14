@@ -1,0 +1,285 @@
+.profile-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+
+  .main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 32px;
+
+    @media (max-width: 1024px) {
+      margin-left: 80px;
+    }
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      padding: 20px;
+    }
+  }
+
+  .profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .header {
+      margin-bottom: 32px;
+
+      h1 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #0a2a44;
+        margin-bottom: 8px;
+      }
+
+      .sub-header {
+        color: #666;
+        font-size: 16px;
+      }
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    // Common Card Styles
+    .profile-card, .subscription-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0a2a44;
+        margin: 0;
+      }
+    }
+
+    // Personal Information Card
+    .profile-card {
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+
+        .edit-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: none;
+          border: 1.5px solid #0a2a44;
+          color: #0a2a44;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background: #0a2a44;
+            color: white;
+          }
+        }
+      }
+
+      .info-group {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        label {
+          display: block;
+          font-size: 12px;
+          font-weight: 600;
+          color: #666;
+          margin-bottom: 4px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        p {
+          font-size: 15px;
+          color: #333;
+          line-height: 1.5;
+          margin: 0;
+          word-break: break-word;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+
+        label {
+          display: block;
+          font-size: 12px;
+          font-weight: 600;
+          color: #666;
+          margin-bottom: 6px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+
+          .required {
+            color: #ef4444;
+            margin-left: 4px;
+          }
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 10px 14px;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 8px;
+          font-size: 15px;
+          transition: all 0.2s;
+          background: white;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+            border-color: #0a2a44;
+            box-shadow: 0 0 0 3px rgba(10, 42, 68, 0.1);
+          }
+
+          &::placeholder {
+            color: #a0aec0;
+          }
+        }
+
+        textarea.form-control {
+          resize: vertical;
+          min-height: 80px;
+        }
+
+        .error-message {
+          color: #ef4444;
+          font-size: 12px;
+          margin-top: 6px;
+        }
+      }
+
+      .form-actions {
+        margin-top: 24px;
+
+        .btn-save {
+          width: 100%;
+          padding: 12px;
+          background: #0a2a44;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover:not(:disabled) {
+            background: #123b5c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(10, 42, 68, 0.2);
+          }
+
+          &:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    // Subscription Card
+    .subscription-card {
+      h2 {
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .plan-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #e2e8f0;
+
+        .plan-badge {
+          background: linear-gradient(135deg, #0a2a44, #123b5c);
+          color: white;
+          padding: 6px 18px;
+          border-radius: 30px;
+          font-size: 14px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }
+
+        .plan-price {
+          font-size: 20px;
+          font-weight: 700;
+          color: #0a2a44;
+        }
+      }
+
+      .subscription-details {
+        .detail-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-bottom: 20px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .detail-item {
+          label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+          }
+
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin: 0;
+          }
+
+          .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e6f7e6;
+            color: #22c55e;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+          }
+
+          .auto-renewal {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

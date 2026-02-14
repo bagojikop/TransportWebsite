@@ -1,0 +1,62 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DSS ERP</h2>
+    <p>Transport Management</p>
+  </div>
+
+  <div class="sidebar-menu">
+    <!-- Dashboard Option -->
+    <div class="menu-item" [class.active]="activeMenu === 'dashboard'" (click)="onDashboardClick()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+        </svg>
+      </div>
+      <span class="menu-text">Dashboard</span>
+    </div>
+
+    
+
+    <!-- Tenants Option -->
+    <div class="menu-item" [class.active]="activeMenu === 'tenants'" (click)="onTenantsClick()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-1 .05 1.16.84 2 1.87 2 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        </svg>
+      </div>
+      <span class="menu-text">Tenants</span>
+    </div>
+
+    <!-- Transporters Option -->
+    <div class="menu-item" [class.active]="activeMenu === 'transporters'" (click)="onTransportersClick()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+      </div>
+      <span class="menu-text">Transporters</span>
+    </div>
+
+    <!-- Profile Option -->
+    <div class="menu-item" [class.active]="activeMenu === 'profile'" (click)="onProfileClick()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+      <span class="menu-text">Profile</span>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <!-- Logout Option -->
+    <div class="menu-item" (click)="onLogoutClick()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+        </svg>
+      </div>
+      <span class="menu-text">Logout</span>
+    </div>
+  </div>
+</div>

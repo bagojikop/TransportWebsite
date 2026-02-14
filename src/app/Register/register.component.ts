@@ -17,6 +17,7 @@ export class RegisterComponent {
   formMessage: string = '';
   isError: boolean = false;
   isLoading: boolean = false;
+  
   http = inject(HttpClient);
 
 

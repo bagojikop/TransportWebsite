@@ -1,0 +1,267 @@
+<div class="transporters-wrapper">
+  <!-- Sidebar Component -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="transporters-container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Transporters</h1>
+        <p class="sub-header">Add new transporter firm details</p>
+      </div>
+
+      <!-- Form Card -->
+      <div class="form-card">
+        <h2>Firm Details</h2>
+        
+        <form #transporterForm="ngForm">
+          <!-- Row 1: Firm Name & Short Name -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firmName">Firm Name <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="firmName" 
+                name="firmName" 
+                class="form-control"
+                placeholder="Enter firm name"
+                [(ngModel)]="transporterData.firmName"
+                #firmName="ngModel"
+                required
+              />
+              <div *ngIf="firmName.invalid && firmName.touched" class="error-message">
+                Firm name is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="shortName">Short Name <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="shortName" 
+                name="shortName" 
+                class="form-control"
+                placeholder="Enter short name"
+                [(ngModel)]="transporterData.firmAlias"
+                #shortName="ngModel"
+                required
+              />
+              <div *ngIf="shortName.invalid && shortName.touched" class="error-message">
+                Short name is required
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Address -->
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="address">Address <span class="required">*</span></label>
+              <textarea 
+                id="address" 
+                name="address" 
+                class="form-control"
+                rows="3"
+                placeholder="Enter complete address"
+                [(ngModel)]="transporterData.firmAddress"
+                #address="ngModel"
+                required
+              ></textarea>
+              <div *ngIf="address.invalid && address.touched" class="error-message">
+                Address is required
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: State & Place -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="state">State <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="state" 
+                name="state" 
+                class="form-control"
+                placeholder="Enter state"
+                [(ngModel)]="transporterData.firmStateCode"
+                #state="ngModel"
+                required
+              />
+              <div *ngIf="state.invalid && state.touched" class="error-message">
+                State is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="place">Place <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="place" 
+                name="place" 
+                class="form-control"
+                placeholder="Enter place"
+                [(ngModel)]="transporterData.firmPlace"
+                #place="ngModel"
+                required
+              />
+              <div *ngIf="place.invalid && place.touched" class="error-message">
+                Place is required
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4: Pincode & Phone -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pincode">Pincode <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="pincode" 
+                name="pincode" 
+                class="form-control"
+                placeholder="Enter pincode"
+                [(ngModel)]="transporterData.firmPinCode"
+                #pincode="ngModel"
+                required
+                pattern="^[1-9][0-9]{5}$"
+              />
+              <div *ngIf="pincode.invalid && pincode.touched" class="error-message">
+                Enter a valid 6-digit pincode
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone <span class="required">*</span></label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                class="form-control"
+                placeholder="Enter phone number"
+                [(ngModel)]="transporterData.firmFno"
+                #phone="ngModel"
+                required
+                pattern="^[0-9]{10,12}$"
+              />
+              <div *ngIf="phone.invalid && phone.touched" class="error-message">
+                Enter a valid phone number
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 5: Mobile & Email -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mobile">Mobile <span class="required">*</span></label>
+              <input 
+                type="tel" 
+                id="mobile" 
+                name="mobile" 
+                class="form-control"
+                placeholder="Enter mobile number"
+                [(ngModel)]="transporterData.firmMobNo"
+                #mobile="ngModel"
+                required
+                pattern="^[0-9]{10}$"
+              />
+              <div *ngIf="mobile.invalid && mobile.touched" class="error-message">
+                Enter a valid 10-digit mobile number
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email ID <span class="required">*</span></label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control"
+                placeholder="Enter email address"
+                [(ngModel)]="transporterData.emailId"
+                #email="ngModel"
+                required
+                email
+              />
+              <div *ngIf="email.invalid && email.touched" class="error-message">
+                Enter a valid email address
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 6: Jurisdiction & Transporter ID -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="jurisdiction">Jurisdiction <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="jurisdiction" 
+                name="jurisdiction" 
+                class="form-control"
+                placeholder="Enter jurisdiction"
+                [(ngModel)]="transporterData.jurisdiction"
+                #jurisdiction="ngModel"
+                required
+              />
+              <div *ngIf="jurisdiction.invalid && jurisdiction.touched" class="error-message">
+                Jurisdiction is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="transporterId">Transporter ID <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="transporterId" 
+                name="transporterId" 
+                class="form-control"
+                placeholder="Enter transporter ID"
+                [(ngModel)]="transporterData.firm_transId"
+                #transporterId="ngModel"
+                required
+              />
+              <div *ngIf="transporterId.invalid && transporterId.touched" class="error-message">
+                Transporter ID is required
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 7: PAN Number -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="panNumber">PAN Number <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="panNumber" 
+                name="panNumber" 
+                class="form-control"
+                placeholder="Enter PAN number"
+                [(ngModel)]="transporterData.firmPan"
+                #panNumber="ngModel"
+                required
+                pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+                uppercase
+              />
+              <div *ngIf="panNumber.invalid && panNumber.touched" class="error-message">
+                Enter a valid PAN number (e.g., ABCDE1234F)
+              </div>
+            </div>
+            <div class="form-group"></div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-cancel" (click)="cancel()">Cancel</button>
+            <button 
+              type="submit" 
+              class="btn btn-submit" 
+              [disabled]="transporterForm.invalid"
+              (click)="saveTransporter()"
+            >
+              Save Transporter
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
