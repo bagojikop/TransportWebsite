@@ -8,15 +8,15 @@
     <div class="header">
       <h1>Dashboard</h1>
       <div class="user-info">
-        <span>Welcome, Admin</span>
-        <div class="avatar">A</div>
+        <span>Welcome, {{ entity?.name }}</span>
+        <div class="avatar">{{ entity?.name?.charAt(0).toUpperCase() }}</div>
       </div>
     </div>
 
     <!-- Dashboard Content -->
     <div class="content">
       <!-- Summary Cards Row -->
-   
+
       <!-- Two Column Layout -->
       <div class="dashboard-grid">
         <!-- Left Column - Domain Information -->
@@ -24,18 +24,75 @@
           <div class="card domain-card">
             <div class="card-header">
               <h2>Domain Information</h2>
-              <span class="badge">Active</span>
+              <span class="badge">{{ entity?.isAction ? 'Active' : 'Inactive' }}</span>
             </div>
             <div class="domain-content">
               <div class="domain-item">
-                <span class="domain-label">Primary Domain</span>
-                <span class="domain-value">https://dsserp.com</span>
+                <span class="domain-label">Your Business Domain</span>
+                <span class="domain-value">
+                  <a href="https://{{entity?.subdomain}}.veererp.com"
+                    target="_blank">https://{{entity?.subdomain}}.veererp.com</a>
+                </span>
               </div>
-            
+              <div class="domain-item">
+                <span class="domain-label">Created On</span>
+                <span class="domain-value">{{ entity?.createdUtc | date:'mediumDate' }}</span>
+              </div>
+
+              <div class="domain-item">
+                <span class="domain-label">Active Firms</span>
+                <span class="domain-value">
+                  {{ entity?.firms.length || 0 }}
+                </span>
+              </div>
+              <button *ngIf="!entity?.firms?.length" class="create-btn" (click)="createFirm()">
+                + Create Firm
+              </button>
+            </div>
+            <div class="domain-content">
+              <table class="firm-table">
+                <thead>
+                  <tr>
+                    <th>Transport</th>
+                    <th>Place</th>
+                    <th>PAN No</th>
+                    <th>Transport Id</th>
+                    <th>Status</th>
+                    <th style="width:120px;">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let firm of entity?.firms">
+                    <td>{{ firm.firmName }}</td>
+                    <td>{{ firm.firmPlace }}</td>
+                    <td>{{ firm.firmPan }}</td>
+                    <td>{{ firm.firm_transId }}</td>
+                    <!-- Status -->
+                    <td>
+                      <span class="status-badge" [ngClass]="firm.active ? 'active' : 'inactive'">
+                        {{ firm.active ? 'Active' : 'Inactive' }}
+                      </span>
+                    </td>
+
+                    <!-- Actions -->
+                    <td class="actions">
+                      <button class="edit-btn" (click)="editFirm(firm)">
+                        Edit
+                      </button>
+
+                      <button class="toggle-btn" [ngClass]="firm.active ? 'deactivate' : 'activate'"
+                        (click)="toggleFirmStatus(firm)">
+                        {{ firm.active ? 'Deactivate' : 'Activate' }}
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
             </div>
           </div>
         </div>
-
         <!-- Right Column - Subscription Validity -->
         <div class="right-column">
           <div class="card subscription-validity-card">
@@ -46,36 +103,37 @@
             <div class="validity-content">
               <div class="validity-item">
                 <span class="validity-label">Current Plan</span>
-                <span class="validity-value plan-name">Enterprise</span>
+                <span class="validity-value plan-name">{{ entity.lic?.licenseType }} | {{ entity.lic?.licenseKey
+                  }}</span>
               </div>
               <div class="validity-item">
                 <span class="validity-label">Valid From</span>
-                <span class="validity-value">01 Jan 2026</span>
+                <span class="validity-value">{{ entity.lic?.issuedDate }}</span>
               </div>
               <div class="validity-item">
                 <span class="validity-label">Valid To</span>
-                <span class="validity-value">31 Dec 2026</span>
+                <span class="validity-value">{{ entity.lic?.expiryDate }}</span>
               </div>
               <div class="validity-item">
-                <span class="validity-label">Days Remaining</span>
-                <span class="validity-value days-remaining">322 Days</span>
+                <span class="validity-label" [ngClass]="{
+    'validity-active': entity.lic?.status === 'Active',
+    'validity-warning': entity.lic?.status === 'ExpiringSoon',
+    'validity-expired': entity.lic?.status === 'Expired'
+  }">Status</span>
+                <span class="validity-value days-remaining">{{ entity.lic?.status }}</span>
               </div>
-              <div class="validity-progress">
-                <!-- <div class="progress-info">
-                  <span class="progress-label">Validity Progress</span>
-                  <span class="progress-percentage">12%</span>
-                </div> -->
-                <!-- <div class="progress-bar">
-                  <div class="progress-fill" style="width: 12%"></div>
-                </div> -->
+
+              <div class="validity-footer" *ngIf="entity.lic?.status === 'Expiring Soon'">
+                <span class="renewal-text">Please renew immediately to avoid any interruption to your business
+                  operations.</span>
               </div>
-              <div class="validity-footer">
-                <span class="renewal-text">Auto renewal on 15 Nov 2026</span>
+              <div class="validity-footer" *ngIf="entity.lic?.status === 'Expired'">
+                <span class="renewal-text">Service has been stopped. Please renew to continue.</span>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
-</div>
