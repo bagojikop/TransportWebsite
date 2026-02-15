@@ -58,6 +58,7 @@
     }
 
     .content {
+
       // Summary Cards Grid
       .summary-grid {
         display: grid;
@@ -95,22 +96,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
+
             &.blue {
               background: rgba(10, 42, 68, 0.1);
               color: #0a2a44;
             }
-            
+
             &.green {
               background: rgba(34, 197, 94, 0.1);
               color: #22c55e;
             }
-            
+
             &.orange {
               background: rgba(245, 158, 11, 0.1);
               color: #f59e0b;
             }
-            
+
             &.purple {
               background: rgba(139, 92, 246, 0.1);
               color: #8b5cf6;
@@ -138,11 +139,11 @@
             .summary-trend {
               font-size: 11px;
               font-weight: 600;
-              
+
               &.positive {
                 color: #22c55e;
               }
-              
+
               &.negative {
                 color: #ef4444;
               }
@@ -270,7 +271,7 @@
               }
             }
 
-           
+
             .validity-footer {
               margin-top: 16px;
               padding-top: 16px;
@@ -290,9 +291,58 @@
                 }
               }
             }
+
+            .validity-active {
+              background-color: #28a745;
+            }
+
+            /* Expiring Soon */
+            .validity-warning {
+              background-color: #ff9800;
+            }
+
+            /* Expired */
+            .validity-expired {
+              background-color: #dc3545;
+            }
           }
         }
       }
     }
   }
+}
+.firm-table{
+  width:100%;
+  border-collapse: collapse;
+  margin-top:12px;
+}
+
+.firm-table th{
+  text-align:left;
+  background:#f5f5f5;
+  padding:10px;
+  font-size:13px;
+}
+
+.firm-table td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+}
+
+.actions button{
+  margin-right:6px;
+}
+
+.create-btn{
+  background:#2e7d32;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.create-btn:hover{
+  background:#1b5e20;
 }
