@@ -8,20 +8,23 @@
     <!-- Dashboard Option -->
     <div class="menu-item" [class.active]="activeMenu === 'dashboard'" (click)="onDashboardClick()">
       <div class="menu-icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 10L12 3L21 10V20H15V14H9V20H3V10Z" stroke="currentColor" fill="none"/>
+          <rect x="3" y="3" width="18" height="18" stroke="currentColor" fill="none" rx="2"/>
         </svg>
       </div>
       <span class="menu-text">Dashboard</span>
     </div>
 
-    
+   
 
     <!-- Tenants Option -->
     <div class="menu-item" [class.active]="activeMenu === 'tenants'" (click)="onTenantsClick()">
       <div class="menu-icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-1 .05 1.16.84 2 1.87 2 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12Z" stroke="currentColor" fill="none"/>
+          <path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="currentColor" fill="none" stroke-linecap="round"/>
+          <path d="M22 21H2" stroke="currentColor" stroke-linecap="round"/>
         </svg>
       </div>
       <span class="menu-text">Tenants</span>
@@ -30,18 +33,93 @@
     <!-- Transporters Option -->
     <div class="menu-item" [class.active]="activeMenu === 'transporters'" (click)="onTransportersClick()">
       <div class="menu-icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="7" width="20" height="12" rx="2" stroke="currentColor" fill="none"/>
+          <path d="M16 7V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7" stroke="currentColor" fill="none"/>
+          <circle cx="7" cy="15" r="2" stroke="currentColor" fill="none"/>
+          <circle cx="17" cy="15" r="2" stroke="currentColor" fill="none"/>
         </svg>
       </div>
       <span class="menu-text">Transporters</span>
     </div>
 
+    
+
+     <!-- User Management Dropdown -->
+    <div class="menu-item has-dropdown" [class.active]="isUserManagementOpen" (click)="toggleUserManagement()">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12Z" stroke="currentColor" fill="none"/>
+          <path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="currentColor" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="menu-text">User Management</span>
+      <span class="dropdown-arrow">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <!-- User Management Submenu -->
+    <div class="submenu" *ngIf="isUserManagementOpen">
+      <!-- Users Option -->
+      <div class="submenu-item" [class.active]="activeMenu === 'users'" (click)="onUsersClick()">
+        <div class="submenu-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12Z" stroke="currentColor" fill="none"/>
+            <path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="currentColor" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="submenu-text">Users</span>
+      </div>
+
+      <!-- Permissions Dropdown -->
+      <div class="submenu-item has-subdropdown" [class.active]="isPermissionsOpen" (click)="togglePermissions($event)">
+        <div class="submenu-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none"/>
+            <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="submenu-text">Permissions</span>
+        <span class="subdropdown-arrow">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+
+      <!-- Permissions Submenu -->
+      <div class="sub-submenu" *ngIf="isPermissionsOpen">
+        <div class="sub-submenu-item" [class.active]="activeMenu === 'user-access'" (click)="onUserAccessClick()">
+          <div class="sub-submenu-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12Z" stroke="currentColor" fill="none"/>
+              <path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="currentColor" fill="none" stroke-linecap="round"/>
+              <path d="M17 9L20 12L23 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="sub-submenu-text">User Access</span>
+        </div>
+        <div class="sub-submenu-item" [class.active]="activeMenu === 'module-access'" (click)="onModuleAccessClick()">
+          <div class="sub-submenu-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none"/>
+              <path d="M8 8H16M8 12H16M8 16H12" stroke="currentColor" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="sub-submenu-text">Module Access</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Profile Option -->
     <div class="menu-item" [class.active]="activeMenu === 'profile'" (click)="onProfileClick()">
       <div class="menu-icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12Z" stroke="currentColor" fill="none"/>
+          <path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="currentColor" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
       <span class="menu-text">Profile</span>
@@ -52,8 +130,10 @@
     <!-- Logout Option -->
     <div class="menu-item" (click)="onLogoutClick()">
       <div class="menu-icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M15 4L19 4C20.1 4 21 4.9 21 6L21 18C21 19.1 20.1 20 19 20L15 20" stroke="currentColor" stroke-linecap="round"/>
+          <path d="M10 16L14 12L10 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 12L2 12" stroke="currentColor" stroke-linecap="round"/>
         </svg>
       </div>
       <span class="menu-text">Logout</span>

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http'; 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +18,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { TransportersComponent } from './transporters/transporters.component';
+import { UsersComponent } from './users/users.component';
+import { UserCreationComponent } from './user-creation/user-creation.component';
+import { UserAccessComponent } from './user-access/user-access.component';
+import { ModuleAccessComponent } from './module-access/module-access.component';
 
 
 @NgModule({
@@ -36,7 +39,11 @@ import { TransportersComponent } from './transporters/transporters.component';
     SidebarComponent,
     ProfileComponent,
     TenantsComponent,
-TransportersComponent  ],
+TransportersComponent,
+UsersComponent,
+UserCreationComponent,
+UserAccessComponent,
+ModuleAccessComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
