@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenantService } from '../services/tenant.service';
 import { CleanObjService } from '../services/cleanobject.service';
+import { messageType, MsgBox } from '../services/MsgBox';
 
 @Component({
   selector: 'app-transporters',
@@ -18,16 +19,19 @@ export class TransportersComponent implements OnInit {
     mst00410: {} as Mst00410
   } as Mst004;
 
+  id:number=history.state.id;
 
+  customerId:number =this.tenantService.getTenant()?.customerId;
   states: any[] = [];
   selectedStateName: string = '';
 
   constructor(private http: HttpClient, private router: Router,
     private tenantService: TenantService,
-    private cleanObjService: CleanObjService, private route: ActivatedRoute) {
-
-  }
-
+    private cleanObjService: CleanObjService,
+    private route: ActivatedRoute,
+    private msgBox: MsgBox
+    
+    ) {}
   ngOnInit(): void {
     this.transporterData = {
       mst00401: {} as Mst00401,
@@ -36,17 +40,15 @@ export class TransportersComponent implements OnInit {
     } as Mst004;
     this.transporterData.mst00409 ??= {} as Mst00409;
     this.loadStates();
+
     this.transporterData.tenantId = this.tenantService.getTenant()?.tenantId || 0;
-    this.route.paramMap.subscribe(params => {
+     
+      if (!this.id) return;
 
-      const id = params.get('id');
-      const tenantId = params.get('tenantId');
-      if (!id) return;
-
-      this.http.get(`${environment.API_URL}tenant/firm-edit`, {
+      this.http.get(`${environment.API_URL}tenant/firm-get`, {
         params: {
-          id: id,
-          tenantId: tenantId ?? ''
+          id: this.id,
+           tenantId: this.customerId
         }
       })
         .subscribe({
@@ -59,9 +61,7 @@ export class TransportersComponent implements OnInit {
           }
         });
 
-    });
-
-  }
+      }
 
 
   loadStates(): void {
@@ -122,11 +122,11 @@ export class TransportersComponent implements OnInit {
     const url = data.firmCode ? "tenant/firm-edit" : "tenant/firm-create";
     this.http.post(`${environment.API_URL}${url}`, data, { params: { id: id } }).subscribe({
       next: (response) => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/transport-dashboard']);
 
-      }, error: (error) => {
-        console.error('Error saving transporter:', error.errors?.message);
-        alert('Failed to save transporter. Please try again.');
+      }, error: (err) => {
+       this.msgBox.Show(messageType.Error,"Error", err.message|| err.error)
+        
       }
     });
   }

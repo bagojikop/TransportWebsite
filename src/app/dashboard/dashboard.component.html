@@ -6,10 +6,11 @@
   <div class="main-content">
     <!-- Header -->
     <div class="header">
-      <h1>Dashboard</h1>
+     
       <div class="user-info">
-        <span>Welcome, {{ entity?.name }}</span>
+      
         <div class="avatar">{{ entity?.name?.charAt(0).toUpperCase() }}</div>
+          <span>Welcome, {{ entity?.name }}</span>
       </div>
     </div>
 
@@ -29,7 +30,7 @@
             <div class="domain-content">
               <div class="domain-item">
                 <span class="domain-label">Your Business Domain</span>
-                <span class="domain-value">
+                <span class="domain-link">
                   <a href="https://{{entity?.subdomain}}.veererp.com"
                     target="_blank">https://{{entity?.subdomain}}.veererp.com</a>
                 </span>
@@ -42,55 +43,22 @@
               <div class="domain-item">
                 <span class="domain-label">Active Firms</span>
                 <span class="domain-value">
-                  {{ entity?.firms.length || 0 }}
+                  {{ entity?.firms || 0 }}
                 </span>
               </div>
-              <button *ngIf="!entity?.firms?.length" class="create-btn" (click)="createFirm()">
+              <button *ngIf="!entity?.firms" class="create-btn" (click)="createFirm()">
                 + Create Firm
               </button>
+
+               <div class="domain-item">
+                <span class="domain-label">Active Users</span>
+                <span class="domain-value">
+                  {{ entity?.users || 0 }}
+                </span>
+              </div>
+             
             </div>
-            <div class="domain-content">
-              <table class="firm-table">
-                <thead>
-                  <tr>
-                    <th>Transport</th>
-                    <th>Place</th>
-                    <th>PAN No</th>
-                    <th>Transport Id</th>
-                    <th>Status</th>
-                    <th style="width:120px;">Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let firm of entity?.firms">
-                    <td>{{ firm.firmName }}</td>
-                    <td>{{ firm.firmPlace }}</td>
-                    <td>{{ firm.firmPan }}</td>
-                    <td>{{ firm.firm_transId }}</td>
-                    <!-- Status -->
-                    <td>
-                      <span class="status-badge" [ngClass]="firm.active ? 'active' : 'inactive'">
-                        {{ firm.active ? 'Active' : 'Inactive' }}
-                      </span>
-                    </td>
-
-                    <!-- Actions -->
-                    <td class="actions">
-                      <button class="edit-btn" (click)="editFirm(firm)">
-                        Edit
-                      </button>
-
-                      <button class="toggle-btn" [ngClass]="firm.active ? 'deactivate' : 'activate'"
-                        (click)="toggleFirmStatus(firm)">
-                        {{ firm.active ? 'Deactivate' : 'Activate' }}
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
+           
           </div>
         </div>
         <!-- Right Column - Subscription Validity -->
@@ -115,7 +83,7 @@
                 <span class="validity-value">{{ entity.lic?.expiryDate }}</span>
               </div>
               <div class="validity-item">
-                <span class="validity-label" [ngClass]="{
+                <span class="badge validity-label" [ngClass]="{
     'validity-active': entity.lic?.status === 'Active',
     'validity-warning': entity.lic?.status === 'ExpiringSoon',
     'validity-expired': entity.lic?.status === 'Expired'
@@ -133,7 +101,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

@@ -41,7 +41,7 @@ export class SidebarComponent {
   onTransportersClick(): void {
     this.activeMenu = 'transporters';
     this.closeAllDropdowns();
-    this.router.navigate(['/transporters']);
+    this.router.navigate(['/transport-dashboard']);
     console.log('Navigating to Transporters');
   }
 

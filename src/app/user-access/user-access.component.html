@@ -53,24 +53,25 @@
             <tr *ngFor="let user of filteredUsers">
               <td>
                 <div class="user-info">
-                  <span class="user-avatar">{{ getUserInitials(user.fullName) }}</span>
+                  <span class="user-avatar">{{ getUserInitials(user.user.userName||'') }}</span>
                   <div class="user-details">
-                    <span class="user-name">{{ user.fullName }}</span>
-                    <span class="user-username">@{{ user.username }}</span>
+                    <span class="user-name">{{ user.user.userLongname }}</span>
+                    <span class="user-username">@{{ user.user.userName }}</span>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="contact-info">
-                  <span class="user-email">{{ user.email }}</span>
-                  <span class="user-phone">{{ user.mobileNo }}</span>
+                  <span class="user-email">{{ user.user.emailId }}</span>
+                  <span class="user-phone">{{ user.user.mobileno }}</span>
                 </div>
               </td>
               <td>
                 <label class="toggle-switch">
                   <input 
                     type="checkbox" 
-                    [(ngModel)]="user.permissions.add"
+                    [(ngModel)]="user.a"
+                       (ngModelChange)="user.a = $event ? 1 : 0"
                     (change)="updatePermissions(user)"
                   />
                   <span class="toggle-slider"></span>
@@ -80,7 +81,8 @@
                 <label class="toggle-switch">
                   <input 
                     type="checkbox" 
-                    [(ngModel)]="user.permissions.edit"
+                    [(ngModel)]="user.e"
+                       (ngModelChange)="user.e = $event ? 1 : 0"
                     (change)="updatePermissions(user)"
                   />
                   <span class="toggle-slider"></span>
@@ -90,7 +92,8 @@
                 <label class="toggle-switch">
                   <input 
                     type="checkbox" 
-                    [(ngModel)]="user.permissions.delete"
+                    [(ngModel)]="user.d"
+                       (ngModelChange)="user.d = $event ? 1 : 0"
                     (change)="updatePermissions(user)"
                   />
                   <span class="toggle-slider"></span>
@@ -100,8 +103,9 @@
                 <label class="toggle-switch">
                   <input 
                     type="checkbox" 
-                    [(ngModel)]="user.permissions.print"
-                    (change)="updatePermissions(user)"
+                    [(ngModel)]="user.p"
+                      (ngModelChange)="user.p = $event ? 1 : 0"
+                    (change)="updatePermissions(user);"
                   />
                   <span class="toggle-slider"></span>
                 </label>

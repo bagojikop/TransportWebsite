@@ -22,6 +22,7 @@ import { UsersComponent } from './users/users.component';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { ModuleAccessComponent } from './module-access/module-access.component';
+import { TransportDashboardComponent } from './transport-dashboard/transport-dashboard.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ TransportersComponent,
 UsersComponent,
 UserCreationComponent,
 UserAccessComponent,
-ModuleAccessComponent  ],
+ModuleAccessComponent,
+TransportDashboardComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

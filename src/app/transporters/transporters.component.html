@@ -53,7 +53,7 @@
               <div class="form-group-column">
                 <div class="form-group">
                   <label for="address">Address <span class="required">*</span></label>
-                  <textarea id="address" name="address" class="form-control address-textarea" rows="3"
+                  <textarea id="address" name="address" class="form-control address-textarea" rows="5"
                     placeholder="Enter complete address" [(ngModel)]="transporterData.firmAddress" #address="ngModel"
                     required></textarea>
                   <div *ngIf="address.invalid && address.touched" class="error-message">

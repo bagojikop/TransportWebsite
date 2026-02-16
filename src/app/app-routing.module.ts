@@ -15,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { ModuleAccessComponent } from './module-access/module-access.component';
+import { TransportDashboardComponent } from './transport-dashboard/transport-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,11 +29,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'transporters/:id/:tenantId', component: TransportersComponent },
-  { path: 'users', component:UsersComponent},
-  { path: 'user-creation', component:UserCreationComponent},
-  { path: 'user-access', component:UserAccessComponent},
-  { path: 'module-access', component:ModuleAccessComponent}
+  { path: 'transport-dashboard', component: TransportDashboardComponent },
+  { path: 'transport-create', component: TransportersComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'user-creation', component: UserCreationComponent },
+  { path: 'user-access', component: UserAccessComponent },
+  { path: 'module-access', component: ModuleAccessComponent }
 
 
 ];

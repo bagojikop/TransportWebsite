@@ -1,18 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TenantService } from '../services/tenant.service';
+import { messageType, MsgBox } from '../services/MsgBox';
+import { environment } from 'src/environments/environment';
+import { Sys00203, Sys00207 } from '../Models/Users';
 
-interface User {
-  username: string;
-  fullName: string;
-  mobileNo: string;
-  email: string;
-  systemAdmin: string;
-}
-
-interface Module {
-  name: string;
-  role: string;
-  access: boolean;
-}
+ 
+ 
 
 @Component({
   selector: 'app-module-access',
@@ -20,105 +15,83 @@ interface Module {
   styleUrls: ['./module-access.component.scss']
 })
 export class ModuleAccessComponent implements OnInit {
-  users: User[] = [];
-  modules: Module[] = [];
-  originalModules: Module[] = [];
-  selectedUser: string = '';
-
-  ngOnInit(): void {
-    this.loadUsers();
-    this.loadModules();
-  }
-
-  loadUsers(): void {
-    const savedUsers = localStorage.getItem('users');
-    if (savedUsers) {
-      this.users = JSON.parse(savedUsers);
-    } else {
-      this.users = [
-        {
-          username: 'admin',
-          fullName: 'aarti',
-          mobileNo: '+91 98765 43210',
-          email: 'aarti@gmail.com',
-          systemAdmin: 'Yes'
-        },
-        {
-          username: 'user',
-          fullName: 'abhi',
-          mobileNo: '+91 87654 32109',
-          email: 'abhi@gmail.com',
-          systemAdmin: 'No'
-        },
-        
-       
-      ];
+  users: Sys00203[] =[] as Sys00203[];
+  modules:Sys00207[]=[] as Sys00207[] 
+  originalModules:Sys00207[]=[] as Sys00207[] 
+  userId: number = 0;
+ 
+customerId = this.tenantService.getTenant()?.customerId;
+  constructor(private router: Router, private http: HttpClient, private tenantService: TenantService, private msgBox: MsgBox) {
+  
     }
-  }
+  
+   
+   ngOnInit(): void {
+    this.http.get(`${environment.API_URL}appUser/user-list`, { params: { customerId: this.customerId } }).subscribe({
+      next: (res: any) => {
+        this.users = res as Sys00203[];
+      }
+    })
+ 
+   }
 
-  loadModules(): void {
-    this.modules = [
-      { name: 'Administrator', role: 'Full system access', access: false },
-      { name: 'Auditor', role: 'View only + audit logs', access: false },
-      { name: 'Finance', role: 'Financial modules access', access: false },
-      { name: 'Transport', role: 'Transport management access', access: false }
-    ];
-    this.originalModules = JSON.parse(JSON.stringify(this.modules));
-  }
+ 
+  
 
   onUserChange(): void {
-    if (this.selectedUser) {
-      const savedAccess = localStorage.getItem(`module_access_${this.selectedUser}`);
-      if (savedAccess) {
-        this.modules = JSON.parse(savedAccess);
-      } else {
-        this.modules = [
-          { name: 'Administrator', role: 'Full system access', access: false },
-          { name: 'Auditor', role: 'View only + audit logs', access: false },
-          { name: 'Finance', role: 'Financial modules access', access: false },
-          { name: 'Transport', role: 'Transport management access', access: false }
-        ];
-      }
-      this.originalModules = JSON.parse(JSON.stringify(this.modules));
+    if (this.userId) {
+        this.http.get(`${environment.API_URL}AppUser/modules-by-user`,
+       { params: { customerId: this.customerId,id:this.userId } }).subscribe({
+         next: (res) => {
+           this.modules = res as Sys00207[];
+           this.originalModules=[...this.modules]
+           
+ 
+         }
+       })
+ 
     }
   }
 
   getSelectedUserName(): string {
-    const user = this.users.find(u => u.username === this.selectedUser);
-    return user ? user.fullName : '';
+    const user = this.users.find(u => u.userId == this.userId);
+    return user ? user.userLongname ||'': '';
   }
 
   getSelectedUserRole(): string {
-    const user = this.users.find(u => u.username === this.selectedUser);
-    return user?.systemAdmin === 'Yes' ? 'System Administrator' : 'Standard User';
+    const user = this.users.find(u => u.userId == this.userId);
+    return user?.isAdmin  ? 'System Administrator' : 'Standard User';
   }
 
   getSelectedUserInitials(): string {
-    const user = this.users.find(u => u.username === this.selectedUser);
+    const user = this.users.find(u => u.userId == this.userId);
     if (!user) return '';
-    return user.fullName.split(' ').map(n => n[0]).join('').toUpperCase();
+    return (user.userLongname||'').charAt(0).toUpperCase();
   }
 
   getGrantedCount(): number {
-    return this.modules.filter(m => m.access).length;
+    return this.modules.filter(m => m.status===true).length;
   }
 
-  updateModuleAccess(module: Module): void {
-    console.log(`Module ${module.name} access: ${module.access}`);
-  }
-
+ 
   saveModuleAccess(): void {
-    if (this.selectedUser) {
-      localStorage.setItem(`module_access_${this.selectedUser}`, JSON.stringify(this.modules));
-      this.originalModules = JSON.parse(JSON.stringify(this.modules));
-      
-      // Show success message (you can use a toast notification here)
-      alert(`Permissions saved for ${this.getSelectedUserName()}`);
-    }
+     this.http.post(`${environment.API_URL}AppPermission/module-auth-update`,
+            this.modules,{params:{customerId:this.customerId}}).subscribe({
+           next: (res) => {
+            
+             this.msgBox.Show(messageType.Success, 'Permissions', "Saved Successfully")
+           },
+           error: (err) => {
+             this.msgBox.Show(messageType.Error, 'Error', err.message || err.error);
+     
+           }
+     
+         })
+     
   }
 
   cancelChanges(): void {
-    this.modules = JSON.parse(JSON.stringify(this.originalModules));
-    alert('Changes reverted');
+    this.modules = [...this.originalModules];
+    ;
   }
 }

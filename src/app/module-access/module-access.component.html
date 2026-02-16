@@ -18,23 +18,19 @@
         <div class="selection-header">
           <div class="header-icon">
             <svg viewBox="0 0 24 24" width="20" height="20">
-              <path fill="#0a2a44" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              <path fill="#0a2a44"
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>
           </div>
           <h3>Select User</h3>
         </div>
-        
+
         <div class="selection-content">
           <div class="select-wrapper">
-            <select 
-              id="userSelect" 
-              class="custom-select"
-              [(ngModel)]="selectedUser"
-              (change)="onUserChange()"
-            >
+            <select id="userSelect" class="custom-select" [(ngModel)]="userId" (change)="onUserChange()">
               <option value="" disabled selected>Choose a user to configure</option>
-              <option *ngFor="let user of users" [value]="user.username">
-                {{ user.fullName }} · {{ user.username }}
+              <option *ngFor="let user of users" [value]="user.userId">
+                {{ user.userLongname }} · {{ user.isAdmin ?'System User' :'User' }}
               </option>
             </select>
             <span class="select-arrow">▼</span>
@@ -43,7 +39,7 @@
       </div>
 
       <!-- Access Control Card -->
-      <div class="access-card" *ngIf="selectedUser">
+      <div class="access-card" *ngIf="userId">
         <div class="card-header">
           <div class="user-badge">
             <span class="user-avatar">{{ getSelectedUserInitials() }}</span>
@@ -57,126 +53,45 @@
               <strong>{{ getGrantedCount() }}</strong> Granted
             </span>
             <span class="summary-item">
-              <strong>{{ modules.length - getGrantedCount() }}</strong> Restricted
+              <strong>{{modules.length - getGrantedCount() }}</strong> Restricted
             </span>
           </div>
         </div>
 
         <div class="modules-container">
           <div class="modules-grid">
-            <!-- Administrator Module -->
-            <div class="module-item" [class.access-granted]="modules[0].access">
-              <div class="module-info">
-                <div class="module-icon admin">
-                  <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                  </svg>
-                </div>
-                <div class="module-details">
-                  <span class="module-name">Administrator</span>
-                  <span class="module-role">Full system access</span>
-                </div>
+
+            <div class="module-item" *ngFor="let module of modules" [class.access-granted]="module.status">
+
+              <div class="module-details">
+                <span class="module-name">{{ module.moduleName }}</span>
               </div>
+
               <div class="module-access">
                 <label class="toggle-switch">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="modules[0].access"
-                    (change)="updateModuleAccess(modules[0])"
-                  />
+                  <input type="checkbox" [(ngModel)]="module.status" />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
+
             </div>
 
-            <!-- Auditor Module -->
-            <div class="module-item" [class.access-granted]="modules[1].access">
-              <div class="module-info">
-                <div class="module-icon auditor">
-                  <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
-                  </svg>
-                </div>
-                <div class="module-details">
-                  <span class="module-name">Auditor</span>
-                  <span class="module-role">View only + audit logs</span>
-                </div>
-              </div>
-              <div class="module-access">
-                <label class="toggle-switch">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="modules[1].access"
-                    (change)="updateModuleAccess(modules[1])"
-                  />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Finance Module -->
-            <div class="module-item" [class.access-granted]="modules[2].access">
-              <div class="module-info">
-                <div class="module-icon finance">
-                  <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7zM12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                  </svg>
-                </div>
-                <div class="module-details">
-                  <span class="module-name">Finance</span>
-                  <span class="module-role">Financial modules access</span>
-                </div>
-              </div>
-              <div class="module-access">
-                <label class="toggle-switch">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="modules[2].access"
-                    (change)="updateModuleAccess(modules[2])"
-                  />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Transport Module -->
-            <div class="module-item" [class.access-granted]="modules[3].access">
-              <div class="module-info">
-                <div class="module-icon transport">
-                  <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path fill="currentColor" d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                  </svg>
-                </div>
-                <div class="module-details">
-                  <span class="module-name">Transport</span>
-                  <span class="module-role">Transport management access</span>
-                </div>
-              </div>
-              <div class="module-access">
-                <label class="toggle-switch">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="modules[3].access"
-                    (change)="updateModuleAccess(modules[3])"
-                  />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-            </div>
           </div>
         </div>
+
 
         <div class="card-footer">
           <div class="action-buttons">
             <button class="btn btn-secondary" (click)="cancelChanges()">
               <svg viewBox="0 0 24 24" width="16" height="16">
-                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                <path fill="currentColor"
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
               </svg>
               Cancel
             </button>
             <button class="btn btn-primary" (click)="saveModuleAccess()">
               <svg viewBox="0 0 24 24" width="16" height="16">
-                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
               </svg>
               Save Changes
             </button>
@@ -185,10 +100,11 @@
       </div>
 
       <!-- Empty State -->
-      <div class="empty-state" *ngIf="!selectedUser">
+      <div class="empty-state" *ngIf="!userId">
         <div class="empty-icon">
           <svg viewBox="0 0 24 24" width="64" height="64">
-            <path fill="#cbd5e0" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+            <path fill="#cbd5e0"
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
           </svg>
         </div>
         <h3>No User Selected</h3>

@@ -1,74 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { Sys00204 } from '../Models/Users';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { TenantService } from '../services/tenant.service';
+import { environment } from 'src/environments/environment';
+import { messageType, MsgBox } from '../services/MsgBox';
 
-interface User {
-  username: string;
-  fullName: string;
-  mobileNo: string;
-  email: string;
-  systemAdmin: string;
-  permissions: {
-    add: boolean;
-    edit: boolean;
-    delete: boolean;
-    print: boolean;
-  };
-}
+
 
 @Component({
   selector: 'app-user-access',
   templateUrl: './user-access.component.html',
   styleUrls: ['./user-access.component.scss']
 })
-export class UserAccessComponent implements OnInit {
-  users: User[] = [];
-  filteredUsers: User[] = [];
-  originalUsers: User[] = [];
-  searchTerm: string = '';
-  hasChanges: boolean = false;
+export class UserAccessComponent {
+  constructor(private router: Router, private http: HttpClient, private tenantService: TenantService, private msgBox: MsgBox) {
 
-  ngOnInit(): void {
-    this.loadUsers();
   }
 
-  loadUsers(): void {
-    // Get users from localStorage or use default data
-    const savedUsers = localStorage.getItem('users');
-    if (savedUsers) {
-      const parsedUsers = JSON.parse(savedUsers);
-      this.users = parsedUsers.map((user: any) => ({
-        ...user,
-        permissions: user.permissions || {
-          add: false,
-          edit: false,
-          delete: false,
-          print: false
+  users: Sys00204[] = [];
+  filteredUsers: Sys00204[] = [];
+  originalUsers: Sys00204[] = [];
+  searchTerm: string = '';
+  hasChanges: boolean = false;
+  customerId = this.tenantService.getTenant()?.customerId;
+  ngOnInit(): void {
+    this.http.get(`${environment.API_URL}AppPermission/users-auth-list`,
+      { params: { customerId: this.customerId } }).subscribe({
+        next: (res) => {
+          this.users = res as Sys00204[]
+          this.originalUsers = JSON.parse(JSON.stringify(this.users));
+          this.filteredUsers = [...this.users];
+
         }
-      }));
-    } else {
-      // Default users
-      this.users = [
-        {
-          username: 'admin',
-          fullName: 'aarti',
-          mobileNo: '+91 98765 43210',
-          email: 'aarti@company.com',
-          systemAdmin: 'Yes',
-          permissions: { add: true, edit: true, delete: false, print: true }
-        },
-        {
-          username: 'user',
-          fullName: 'abhi',
-          mobileNo: '+91 87654 32109',
-          email: 'abhi@gmail.com',
-          systemAdmin: 'No',
-          permissions: { add: false, edit: true, delete: false, print: false }
-        },
-       
-      ];
-    }
-    
-    this.originalUsers = JSON.parse(JSON.stringify(this.users));
-    this.filteredUsers = [...this.users];
+      })
+
+
   }
 
   getUserInitials(fullName: string): string {
@@ -85,30 +52,41 @@ export class UserAccessComponent implements OnInit {
       this.filteredUsers = [...this.users];
       return;
     }
-    
+
     const term = this.searchTerm.toLowerCase().trim();
-    this.filteredUsers = this.users.filter(user => 
-      user.fullName.toLowerCase().includes(term) || 
-      user.username.toLowerCase().includes(term) ||
-      user.email.toLowerCase().includes(term)
+    this.filteredUsers = this.users.filter(user =>
+      user.user.userLongname!.toLowerCase().includes(term) ||
+      user.user.userName!.toLowerCase().includes(term) ||
+      user.user.emailId!.toLowerCase().includes(term)
     );
   }
 
-  updatePermissions(user: User): void {
+  updatePermissions(user: Sys00204): void {
     this.hasChanges = true;
   }
 
   savePermissions(): void {
-    localStorage.setItem('userPermissions', JSON.stringify(this.users));
-    this.originalUsers = JSON.parse(JSON.stringify(this.users));
-    this.hasChanges = false;
-    alert('Permissions saved successfully');
+    this.http.post(`${environment.API_URL}AppPermission/users-auth-update`,
+       this.filteredUsers,{params:{customerId:this.customerId}}).subscribe({
+      next: (res) => {
+        this.users = res as Sys00204[];
+        this.originalUsers = JSON.parse(JSON.stringify(this.users));
+        this.hasChanges = false;
+        this.msgBox.Show(messageType.Success, 'Permissions', "Saved Successfully")
+      },
+      error: (err) => {
+        this.msgBox.Show(messageType.Error, 'Error', err.message || err.error);
+
+      }
+
+    })
+
   }
 
   cancelChanges(): void {
     this.users = JSON.parse(JSON.stringify(this.originalUsers));
     this.filterUsers();
     this.hasChanges = false;
-    alert('Changes cancelled');
+
   }
 }

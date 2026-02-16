@@ -5,6 +5,8 @@
   background: #f5f7fa;
 
   // Main Content Styles
+
+
   .main-content {
     flex: 1;
     margin-left: 260px;
@@ -56,293 +58,300 @@
         }
       }
     }
+  }
 
-    .content {
+  .content {
 
-      // Summary Cards Grid
-      .summary-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 32px;
+    // Summary Cards Grid
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
 
-        @media (max-width: 1200px) {
-          grid-template-columns: repeat(2, 1fr);
+      @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 768px) {
-          grid-template-columns: 1fr;
-        }
-
-        .summary-card {
-          background: white;
-          border-radius: 16px;
-          padding: 20px;
+        .summary-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
-          gap: 16px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          transition: all 0.2s;
+          justify-content: center;
 
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+          &.blue {
+            background: rgba(10, 42, 68, 0.1);
+            color: #0a2a44;
           }
 
-          .summary-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          &.green {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+          }
 
-            &.blue {
-              background: rgba(10, 42, 68, 0.1);
-              color: #0a2a44;
-            }
+          &.orange {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+          }
 
-            &.green {
-              background: rgba(34, 197, 94, 0.1);
+          &.purple {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+          }
+        }
+
+        .summary-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+
+          .summary-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+          }
+
+          .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a2a44;
+            margin-bottom: 4px;
+          }
+
+          .summary-trend {
+            font-size: 11px;
+            font-weight: 600;
+
+            &.positive {
               color: #22c55e;
             }
 
-            &.orange {
-              background: rgba(245, 158, 11, 0.1);
-              color: #f59e0b;
-            }
-
-            &.purple {
-              background: rgba(139, 92, 246, 0.1);
-              color: #8b5cf6;
+            &.negative {
+              color: #ef4444;
             }
           }
+        }
+      }
+    }
 
-          .summary-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+    // Dashboard Grid - Two Column Layout
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
 
-            .summary-label {
-              font-size: 12px;
-              color: #666;
-              margin-bottom: 4px;
-            }
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
 
-            .summary-value {
-              font-size: 24px;
-              font-weight: 700;
-              color: #0a2a44;
-              margin-bottom: 4px;
-            }
+      .card {
+        background: white;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        height: fit-content;
 
-            .summary-trend {
-              font-size: 11px;
-              font-weight: 600;
+        .card-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 24px;
+          padding-bottom: 16px;
+          border-bottom: 1px solid #e2e8f0;
 
-              &.positive {
-                color: #22c55e;
-              }
+          h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0a2a44;
+            margin: 0;
+          }
 
-              &.negative {
-                color: #ef4444;
-              }
+          .badge {
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(10, 42, 68, 0.1);
+            color: #0a2a44;
+
+            &.success {
+              background: rgba(34, 197, 94, 0.1);
+              color: #22c55e;
             }
           }
         }
       }
 
-      // Dashboard Grid - Two Column Layout
-      .dashboard-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-
-        @media (max-width: 992px) {
-          grid-template-columns: 1fr;
-        }
-
-        .card {
-          background: white;
-          border-radius: 16px;
-          padding: 28px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          height: fit-content;
-
-          .card-header {
+      // Domain Card
+      .domain-card {
+        .domain-content {
+          .domain-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
 
-            h2 {
-              font-size: 18px;
-              font-weight: 600;
-              color: #0a2a44;
-              margin: 0;
+            &:last-child {
+              border-bottom: none;
             }
 
-            .badge {
-              padding: 6px 16px;
-              border-radius: 30px;
-              font-size: 12px;
-              font-weight: 600;
-              background: rgba(10, 42, 68, 0.1);
-              color: #0a2a44;
+            .domain-label {
+              font-size: 13px;
+              font-weight: 500;
+              color: #666;
+            }
 
-              &.success {
-                background: rgba(34, 197, 94, 0.1);
-                color: #22c55e;
-              }
+            .domain-value {
+              font-size: 14px;
+              font-weight: 600;
+              color: #0a2a44;
+              word-break: break-all;
+              text-align: right;
             }
           }
         }
+      }
 
-        // Domain Card
-        .domain-card {
-          .domain-content {
-            .domain-item {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              padding: 14px 0;
-              border-bottom: 1px solid #f1f5f9;
+      // Subscription Validity Card
+      .subscription-validity-card {
+        .validity-content {
+          .validity-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #f1f5f9;
 
-              &:last-child {
-                border-bottom: none;
-              }
+            &:last-child {
+              border-bottom: none;
+            }
 
-              .domain-label {
-                font-size: 13px;
-                font-weight: 500;
-                color: #666;
-              }
+            .validity-label {
+              font-size: 13px;
+              font-weight: 500;
+              color: #666;
+            }
 
-              .domain-value {
-                font-size: 14px;
-                font-weight: 600;
+            .validity-value {
+              font-size: 14px;
+              font-weight: 600;
+              color: #333;
+
+              &.plan-name {
                 color: #0a2a44;
-                word-break: break-all;
-                text-align: right;
+                background: rgba(10, 42, 68, 0.1);
+                padding: 4px 12px;
+                border-radius: 30px;
+                font-size: 13px;
+              }
+
+              &.days-remaining {
+                color: #22c55e;
+                font-size: 16px;
               }
             }
           }
-        }
 
-        // Subscription Validity Card
-        .subscription-validity-card {
-          .validity-content {
-            .validity-item {
+
+          .validity-footer {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #e2e8f0;
+
+            .renewal-text {
+              font-size: 12px;
+              color: #666;
               display: flex;
               align-items: center;
-              justify-content: space-between;
-              padding: 14px 0;
-              border-bottom: 1px solid #f1f5f9;
+              gap: 6px;
 
-              &:last-child {
-                border-bottom: none;
-              }
-
-              .validity-label {
-                font-size: 13px;
-                font-weight: 500;
-                color: #666;
-              }
-
-              .validity-value {
+              &::before {
+                content: '↻';
                 font-size: 14px;
-                font-weight: 600;
-                color: #333;
-
-                &.plan-name {
-                  color: #0a2a44;
-                  background: rgba(10, 42, 68, 0.1);
-                  padding: 4px 12px;
-                  border-radius: 30px;
-                  font-size: 13px;
-                }
-
-                &.days-remaining {
-                  color: #22c55e;
-                  font-size: 16px;
-                }
+                color: #f59e0b;
               }
             }
+          }
 
+          .validity-active {
+            background-color: #28a745;
+          }
 
-            .validity-footer {
-              margin-top: 16px;
-              padding-top: 16px;
-              border-top: 1px dashed #e2e8f0;
+          /* Expiring Soon */
+          .validity-warning {
+            background-color: #ff9800;
+          }
 
-              .renewal-text {
-                font-size: 12px;
-                color: #666;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-
-                &::before {
-                  content: '↻';
-                  font-size: 14px;
-                  color: #f59e0b;
-                }
-              }
-            }
-
-            .validity-active {
-              background-color: #28a745;
-            }
-
-            /* Expiring Soon */
-            .validity-warning {
-              background-color: #ff9800;
-            }
-
-            /* Expired */
-            .validity-expired {
-              background-color: #dc3545;
-            }
+          /* Expired */
+          .validity-expired {
+            background-color: #dc3545;
           }
         }
       }
     }
   }
 }
-.firm-table{
-  width:100%;
+
+.firm-table {
+  width: 100%;
   border-collapse: collapse;
-  margin-top:12px;
+  margin-top: 12px;
 }
 
-.firm-table th{
-  text-align:left;
-  background:#f5f5f5;
-  padding:10px;
-  font-size:13px;
+.firm-table th {
+  text-align: left;
+  background: #f5f5f5;
+  padding: 10px;
+  font-size: 13px;
 }
 
-.firm-table td{
-  padding:10px;
-  border-bottom:1px solid #eee;
+.firm-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-.actions button{
-  margin-right:6px;
+.actions button {
+  margin-right: 6px;
 }
 
-.create-btn{
-  background:#2e7d32;
-  color:#fff;
-  border:none;
-  padding:6px 14px;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:13px;
+.create-btn {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
 }
 
-.create-btn:hover{
-  background:#1b5e20;
+.create-btn:hover {
+  background: #1b5e20;
+}
+
+.domain-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
 }

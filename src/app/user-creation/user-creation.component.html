@@ -6,11 +6,15 @@
   <div class="main-content">
     <div class="user-creation-container">
       <!-- Header -->
-      <div class="header">
+      <div class="header" *ngIf="!userData.userId">
         <h1>Create New User</h1>
         <p class="sub-header">Add a new user to the system</p>
       </div>
 
+       <div class="header" *ngIf="userData.userId">
+        <h1>Update User</h1>
+        <p class="sub-header">update user to the system</p>
+      </div>
       <!-- Form Card -->
       <div class="form-card">
         <form #userForm="ngForm">
@@ -23,7 +27,7 @@
               name="name" 
               class="form-control"
               placeholder="Enter full name"
-              [(ngModel)]="userData.name"
+              [(ngModel)]="userData.userLongname"
               #name="ngModel"
               required
             />
@@ -41,7 +45,7 @@
               name="mobileNo" 
               class="form-control"
               placeholder="Enter mobile number"
-              [(ngModel)]="userData.mobileNo"
+              [(ngModel)]="userData.mobileno"
               #mobileNo="ngModel"
               required
               pattern="^[0-9]{10}$"
@@ -61,7 +65,7 @@
               name="email" 
               class="form-control"
               placeholder="Enter email address"
-              [(ngModel)]="userData.email"
+              [(ngModel)]="userData.emailId"
               #email="ngModel"
               required
               email
@@ -71,8 +75,9 @@
             </div>
           </div>
 
+          
           <!-- Username -->
-          <div class="form-group">
+          <div class="form-group" *ngIf="!userData.userId">
             <label for="username">Username <span class="required">*</span></label>
             <input 
               type="text" 
@@ -80,7 +85,7 @@
               name="username" 
               class="form-control"
               placeholder="Enter username"
-              [(ngModel)]="userData.username"
+              [(ngModel)]="userData.userName"
               #username="ngModel"
               required
               minlength="4"
@@ -92,7 +97,7 @@
           </div>
 
           <!-- Password with Generate Button -->
-          <div class="form-group">
+          <div class="form-group" *ngIf="!userData.userId">
             <label for="password">Password <span class="required">*</span></label>
             <div class="password-container">
               <div class="password-input-wrapper">
@@ -102,7 +107,7 @@
                   name="password" 
                   class="form-control password-input"
                   placeholder="Enter password"
-                  [(ngModel)]="userData.password"
+                  [(ngModel)]="userData.cred!.password"
                   #password="ngModel"
                   required
                   minlength="6"
@@ -137,12 +142,15 @@
               <span *ngIf="password.errors?.['required']">Password is required</span>
               <span *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</span>
             </div>
-            <div class="password-strength" *ngIf="userData.password">
+            <div class="password-strength" *ngIf="userData.cred?.password">
               <div class="strength-bar" [class]="getPasswordStrengthClass()"></div>
               <span class="strength-text">{{ getPasswordStrengthText() }}</span>
             </div>
           </div>
 
+
+
+           
           <!-- Form Actions -->
           <div class="form-actions">
             <button type="button" class="btn btn-cancel" (click)="cancel()">Cancel</button>
