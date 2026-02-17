@@ -24,4 +24,12 @@ export class ProfileComponent {
     alert('Profile updated successfully!');
     this.isEditing = false;
   }
+
+  getInitials(): string {
+    return this.profileData.fullName
+      .split(' ')
+      .map(name => name.charAt(0))
+      .join('')
+      .toUpperCase();
+  }
 }

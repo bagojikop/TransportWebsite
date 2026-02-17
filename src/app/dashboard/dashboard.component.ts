@@ -40,6 +40,11 @@ export class DashboardComponent {
     this.router.navigate(['/transporters',{id:firm.firmCode}]);
   }
 
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
+   
+  }
+
   toggleFirmStatus(firm: any) {
     firm.active = !firm.active;
     this.http.post(`${environment.API_URL}tenant/firm-disable`,firm).subscribe({
