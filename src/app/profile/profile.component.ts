@@ -58,9 +58,9 @@ save(){
 
   getInitials(): string {
 
-    if (!this.entity?.name) return '';
+    if (!this.entity?.customerName) return '';
 
-    return this.entity.name.charAt(0).toUpperCase();
+    return this.entity.customerName.charAt(0).toUpperCase();
 
   }
 
