@@ -89,6 +89,6 @@ export class SidebarComponent {
   // Logout click event
   onLogoutClick(): void {
     console.log('Logging out');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 }

@@ -4,7 +4,13 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <!-- Header -->
+   
+    <!-- Dashboard Content -->
+    <div class="content">
+      
+      <!-- Single Column Layout -->
+      <div class="dashboard-single">
+         <!-- Header -->
     <div class="header">
       <div class="user-info" (click)="navigateToProfile()">
         <div class="avatar">{{ entity?.name?.charAt(0).toUpperCase() }}</div>
@@ -12,10 +18,6 @@
       </div>
     </div>
 
-    <!-- Dashboard Content -->
-    <div class="content">
-      <!-- Single Column Layout -->
-      <div class="dashboard-single">
         <!-- Domain Information Card -->
         <div class="card domain-card">
           <div class="card-header">

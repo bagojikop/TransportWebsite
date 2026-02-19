@@ -21,28 +21,17 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   
-
     this.entity = this.authService.getUser();
-
-     
-   
   }
 
 save(){
-   this.http.post(`${environment.API_URL}tenant/tenant-save`,this.entity).subscribe({
-
+   this.http.post(`${environment.API_URL}register/update`,this.entity).subscribe({
       next: (res: any) => {
-
         this.isLoading = false;
+        this.authService.setUser(res);
+        this.isEditing=false;
       },
-
       error: (err) => {
-
-       
-
-       
-
         this.isLoading = false;
       }
 
