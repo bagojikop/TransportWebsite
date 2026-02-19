@@ -29,7 +29,8 @@ export class UserAccessComponent {
       { params: { customerId: this.customerId } }).subscribe({
         next: (res) => {
           this.users = res as Sys00204[]
-          this.originalUsers = JSON.parse(JSON.stringify(this.users));
+          this.originalUsers = [...this.users];
+           
           this.filteredUsers = [...this.users];
 
         }
