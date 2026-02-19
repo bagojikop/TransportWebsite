@@ -6,101 +6,104 @@
   <div class="main-content">
     <!-- Header -->
     <div class="header">
-     
-      <div class="user-info">
-      
+      <div class="user-info" (click)="navigateToProfile()">
         <div class="avatar">{{ entity?.name?.charAt(0).toUpperCase() }}</div>
-          <span>Welcome, {{ entity?.name }}</span>
+        <span>Welcome, {{ entity?.name }}</span>
       </div>
     </div>
 
     <!-- Dashboard Content -->
     <div class="content">
-      <!-- Summary Cards Row -->
-
-      <!-- Two Column Layout -->
-      <div class="dashboard-grid">
-        <!-- Left Column - Domain Information -->
-        <div class="left-column">
-          <div class="card domain-card">
-            <div class="card-header">
-              <h2>Domain Information</h2>
-              <span class="badge">{{ entity?.isAction ? 'Active' : 'Inactive' }}</span>
+      <!-- Single Column Layout -->
+      <div class="dashboard-single">
+        <!-- Domain Information Card -->
+        <div class="card domain-card">
+          <div class="card-header">
+            <h2>Domain Information</h2>
+            <span class="badge" [ngClass]="entity?.isAction ? 'badge-active' : 'badge-inactive'">
+              {{ entity?.isAction ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <div class="card-content">
+            <div class="info-row">
+              <span class="info-label">Your Business Domain</span>
+              <span class="info-value domain-link">
+                <a href="https://{{entity?.subdomain}}.veererp.com" target="_blank">
+                  https://{{entity?.subdomain}}.veererp.com
+                </a>
+              </span>
             </div>
-            <div class="domain-content">
-              <div class="domain-item">
-                <span class="domain-label">Your Business Domain</span>
-                <span class="domain-link">
-                  <a href="https://{{entity?.subdomain}}.veererp.com"
-                    target="_blank">https://{{entity?.subdomain}}.veererp.com</a>
-                </span>
-              </div>
-              <div class="domain-item">
-                <span class="domain-label">Created On</span>
-                <span class="domain-value">{{ entity?.createdUtc | date:'mediumDate' }}</span>
-              </div>
-
-              <div class="domain-item">
-                <span class="domain-label">Active Firms</span>
-                <span class="domain-value">
-                  {{ entity?.firms || 0 }}
-                </span>
-              </div>
-              <button *ngIf="!entity?.firms" class="create-btn" (click)="createFirm()">
-                + Create Firm
-              </button>
-
-               <div class="domain-item">
-                <span class="domain-label">Active Users</span>
-                <span class="domain-value">
-                  {{ entity?.users || 0 }}
-                </span>
-              </div>
-             
+            <div class="info-row">
+              <span class="info-label">Created On</span>
+              <span class="info-value">{{ entity?.createdUtc | date:'mediumDate' }}</span>
             </div>
-           
+            <div class="info-row">
+              <span class="info-label">Active Firms</span>
+              <span class="info-value firm-count">
+                {{ entity?.firms || 0 }}
+                <button *ngIf="!entity?.firms" class="create-firm-btn" (click)="createFirm()">
+                  + Create Firm
+                </button>
+              </span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Active Users</span>
+              <span class="info-value">{{ entity?.users || 0 }}</span>
+            </div>
           </div>
         </div>
-        <!-- Right Column - Subscription Validity -->
-        <div class="right-column">
-          <div class="card subscription-validity-card">
-            <div class="card-header">
-              <h2>Subscription Validity</h2>
-              <span class="badge success">Active</span>
-            </div>
-            <div class="validity-content">
-              <div class="validity-item">
-                <span class="validity-label">Current Plan</span>
-                <span class="validity-value plan-name">{{ entity.lic?.licenseType }} | {{ entity.lic?.licenseKey
-                  }}</span>
-              </div>
-              <div class="validity-item">
-                <span class="validity-label">Valid From</span>
-                <span class="validity-value">{{ entity.lic?.issuedDate }}</span>
-              </div>
-              <div class="validity-item">
-                <span class="validity-label">Valid To</span>
-                <span class="validity-value">{{ entity.lic?.expiryDate }}</span>
-              </div>
-              <div class="validity-item">
-                <span class="badge validity-label" [ngClass]="{
-    'validity-active': entity.lic?.status === 'Active',
-    'validity-warning': entity.lic?.status === 'ExpiringSoon',
-    'validity-expired': entity.lic?.status === 'Expired'
-  }">Status</span>
-                <span class="validity-value days-remaining">{{ entity.lic?.status }}</span>
-              </div>
 
-              <div class="validity-footer" *ngIf="entity.lic?.status === 'Expiring Soon'">
-                <span class="renewal-text">Please renew immediately to avoid any interruption to your business
-                  operations.</span>
-              </div>
-              <div class="validity-footer" *ngIf="entity.lic?.status === 'Expired'">
-                <span class="renewal-text">Service has been stopped. Please renew to continue.</span>
-              </div>
+        <!-- Subscription Validity Card -->
+        <div class="card subscription-card">
+          <div class="card-header">
+            <h2>Subscription Validity</h2>
+            <span class="badge" [ngClass]="{
+              'badge-active': entity.lic?.status === 'Active',
+              'badge-warning': entity.lic?.status === 'ExpiringSoon' || entity.lic?.status === 'Expiring Soon',
+              'badge-expired': entity.lic?.status === 'Expired'
+            }">
+              {{ entity.lic?.status }}
+            </span>
+          </div>
+          <div class="card-content">
+            <div class="info-row">
+              <span class="info-label">Current Plan</span>
+              <span class="info-value plan-badge">
+                {{ entity.lic?.licenseType }} | {{ entity.lic?.licenseKey }}
+              </span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Valid From</span>
+              <span class="info-value">{{ entity.lic?.issuedDate }}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Valid To</span>
+              <span class="info-value">{{ entity.lic?.expiryDate }}</span>
+            </div>
+            <div class="info-row status-row">
+              <span class="info-label">Status</span>
+              <span class="info-value status-badge" [ngClass]="{
+                'status-active': entity.lic?.status === 'Active',
+                'status-warning': entity.lic?.status === 'ExpiringSoon' || entity.lic?.status === 'Expiring Soon',
+                'status-expired': entity.lic?.status === 'Expired'
+              }">
+                {{ entity.lic?.status }}
+              </span>
+            </div>
+
+            <!-- Warning Messages -->
+            <div class="message warning" *ngIf="entity.lic?.status === 'ExpiringSoon' || entity.lic?.status === 'Expiring Soon'">
+              <span class="message-icon">⚠️</span>
+              <span class="message-text">Please renew immediately to avoid any interruption to your business operations.</span>
+            </div>
+            
+            <div class="message error" *ngIf="entity.lic?.status === 'Expired'">
+              <span class="message-icon">❌</span>
+              <span class="message-text">Service has been stopped. Please renew to continue.</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
