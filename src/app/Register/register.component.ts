@@ -20,6 +20,7 @@ export class RegisterComponent {
   
   http = inject(HttpClient);
 
+  selectedPlan: string =history.state.selectedPlan || '';
 
   constructor(
     private fb: FormBuilder,
@@ -76,6 +77,10 @@ export class RegisterComponent {
           next: (response) => {
 
             this.formMessage = 'Sign up successful! Redirecting...';
+            if(this.selectedPlan){
+             this.router.navigate(['/order'],{state: { selectedPlan: this.selectedPlan }});
+            }
+            else
             this.router.navigate(['/register-success']);
           },
           error: (error) => {

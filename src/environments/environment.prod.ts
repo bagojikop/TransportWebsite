@@ -1,3 +1,3 @@
 export const environment = {
-  API_URL: 'http://localhost:5062/'
+  API_URL: 'https://veererp.com/pi/'
 }

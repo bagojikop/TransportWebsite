@@ -1,0 +1,6 @@
+<p>payment-status works!</p>
+<h2 *ngIf="status === 'SUCCESS'">✅ Payment Successful</h2>
+<h2 *ngIf="status !== 'SUCCESS'">❌ Payment Failed</h2>
+
+<p>Order ID: {{orderId}}</p>
+<p>Status: {{status}}</p>

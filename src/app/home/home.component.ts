@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   companyLinks = [
     { name: 'About Us', link: '#' },
     { name: 'Contact', link: '#' },
-    { name: 'Blog', link: '#' },
+    { name: 'policy', link: '/policy' },
     { name: 'Careers', link: '#' },
     { name: 'Support', link: '#' }
   ];
@@ -226,6 +226,7 @@ onScheduleButtonClick(buttonType: string, event?: Event): void {
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
         button.style.transform = '';
+        this.router.navigate(['/user-register'],{state: { selectedPlan: planName }});
       }, 200);
     }
     

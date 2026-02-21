@@ -251,8 +251,8 @@
             {{ plan.price }}<span class="pricing-period">/month</span>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="onPlanButtonClick(plan.name, $event)" routerLink="/user-register">
-          Get Started
+        <button class="btn btn-primary" (click)="onPlanButtonClick(plan.name, $event)" >
+          Place Order
         </button>
       </div>
 
@@ -371,7 +371,7 @@
         <h3>Company</h3>
         <ul>
           <li *ngFor="let link of companyLinks">
-            <a href="#">{{ link.name }}</a>
+            <a routerLink="{{ link.link }}">{{ link.name }}</a>
           </li>
         </ul>
       </div>
