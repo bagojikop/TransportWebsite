@@ -1,0 +1,187 @@
+<div class="order-wrapper">
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="order-container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Complete Your Order</h1>
+        <p class="sub-header">You're just one step away from getting started</p>
+      </div>
+
+      <div class="order-grid">
+        <!-- Left Column - Order Summary (Monthly) -->
+        <div class="order-summary">
+          <div class="summary-card">
+            <h2>Order Summary <span class="billing-badge monthly">Monthly</span></h2>
+            
+            <!-- Selected Plan -->
+            <div class="selected-plan">
+              <div class="plan-badge">Selected Plan</div>
+              <div class="plan-details">
+                <div class="plan-name">Basic Plan</div>
+                <div class="plan-price">₹1,000 <span class="price-period">/month</span></div>
+              </div>
+            </div>
+
+            <!-- Users Selection -->
+            <div class="selection-item">
+              <div class="selection-header">
+                <span class="item-label">Users</span>
+                <span class="item-price">₹250 per additional user</span>
+              </div>
+              <div class="counter-row">
+                <div class="counter-control">
+                  <button class="counter-btn" (click)="updateUsers('decrease')" [disabled]="users <= 1">−</button>
+                  <span class="counter-value">{{ users }}</span>
+                  <button class="counter-btn" (click)="updateUsers('increase')" [disabled]="users >= maxUsers">+</button>
+                </div>
+                <div class="item-total">+ ₹{{ (users - 1) * 250 }}</div>
+              </div>
+            </div>
+
+            <!-- Firms Selection -->
+            <div class="selection-item">
+              <div class="selection-header">
+                <span class="item-label">Firms</span>
+                <span class="item-price">₹250 per additional firm</span>
+              </div>
+              <div class="counter-row">
+                <div class="counter-control">
+                  <button class="counter-btn" (click)="updateFirms('decrease')" [disabled]="firms <= 1">−</button>
+                  <span class="counter-value">{{ firms }}</span>
+                  <button class="counter-btn" (click)="updateFirms('increase')">+</button>
+                </div>
+                <div class="item-total">+ ₹{{ (firms - 1) * 250 }}</div>
+              </div>
+            </div>
+
+            <!-- Add-Ons - All for ₹250/month -->
+            <div class="addons-section">
+              <div class="addon-header">
+                <h3>Add-Ons <span class="addon-badge">Optional</span></h3>
+                <span class="addon-total-price">₹250(All features)</span>
+              </div>
+              
+              <div class="addon-item" (click)="toggleAddonBundle()">
+                <label class="checkbox-container">
+                  <span class="checkmark" [class.checked]="addonBundle"></span>
+                  <div class="addon-info">
+                    <span class="addon-name">Complete Add-On Bundle</span>
+                    <span class="addon-desc">Get all features in one package</span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="bundle-features">
+                <div class="feature-item">
+                  <i class="fas fa-check-circle" [class.active]="addonBundle"></i>
+                  <span>E-Invoice</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle" [class.active]="addonBundle"></i>
+                  <span>E-Way Bill</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle" [class.active]="addonBundle"></i>
+                  <span>WhatsApp</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle" [class.active]="addonBundle"></i>
+                  <span>Email Services</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Promo Code -->
+            <div class="promo-section">
+              <h3>Promotional Code</h3>
+              <div class="promo-input-group">
+                <input 
+                  type="text" 
+                  placeholder="Enter promo code"
+                  #promoInput
+                >
+                <button class="check-btn" (click)="applyPromo(promoInput.value)">Check</button>
+              </div>
+              <div class="promo-message" *ngIf="promoMessage">
+                <i class="fas" [class.fa-check-circle]="promoValid" [class.fa-times-circle]="!promoValid"></i>
+                {{ promoMessage }}
+              </div>
+            </div>
+
+            <div class="monthly-total">
+              <span>Monthly Total:</span>
+              <span class="monthly-amount">₹{{ monthlySubtotal }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Price Breakdown (Yearly) -->
+        <div class="price-breakdown">
+          <div class="price-card">
+            <h2>Price Breakdown <span class="billing-badge yearly">Yearly Billing</span></h2>
+
+            <div class="price-list">
+              <!-- Base Plan - Always visible -->
+              <div class="price-item">
+                <span>Base Plan (Basic)</span>
+                <span>₹{{ selectedPlan.price * 12 }}/year</span>
+              </div>
+              
+              <!-- Additional Users - Always visible, shows 0 when not selected -->
+              <div class="price-item">
+                <span>Additional Users ({{ users > 1 ? users - 1 : 0 }})</span>
+                <span>{{ users > 1 ? '+' : '' }} ₹{{ (users - 1) * 250 * 12 }}/year</span>
+              </div>
+              
+              <!-- Additional Firms - Always visible, shows 0 when not selected -->
+              <div class="price-item">
+                <span>Additional Firms ({{ firms > 1 ? firms - 1 : 0 }})</span>
+                <span>{{ firms > 1 ? '+' : '' }} ₹{{ (firms - 1) * 250 * 12 }}/year</span>
+              </div>
+              
+              <!-- Add-On Bundle - Always visible, shows 0 when not selected -->
+              <div class="price-item">
+                <span>Add-On Bundle</span>
+                <span>{{ addonBundle ? '+' : '' }} ₹{{ addonBundle ? 250 * 12 : 0 }}/year</span>
+              </div>
+              
+              <!-- Discount - Only visible when applied -->
+              <div class="price-item" *ngIf="discountAmount > 0">
+                <span>Discount ({{ promoCodeDisplay }})</span>
+                <span>- ₹{{ discountAmount * 12 }}/year</span>
+              </div>
+            </div>
+
+            <div class="price-divider"></div>
+
+            <div class="price-item subtotal">
+              <span>Subtotal (Yearly)</span>
+              <span>₹{{ yearlySubtotal }}</span>
+            </div>
+
+            <div class="price-item gst">
+              <span>GST (18%)</span>
+              <span>+ ₹{{ yearlyGstAmount }}</span>
+            </div>
+
+            <div class="price-divider"></div>
+
+            <div class="total-amount">
+              <div class="total-label">Total Amount (Yearly)</div>
+              <div class="total-value">₹{{ yearlyTotalAmount }}</div>
+            </div>
+
+           
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button class="btn btn-cancel">Cancel</button>
+              <button class="btn btn-proceed">Proceed to Payment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

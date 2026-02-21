@@ -1,0 +1,551 @@
+.order-wrapper {
+    min-height: 100vh;
+    background: #f8fafc;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.order-container {
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+        
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            color:#283593;
+            margin-bottom: 4px;
+        }
+        
+        .sub-header {
+            color: #64748b;
+            font-size: 13px;
+        }
+    }
+}
+
+.order-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Order Summary Card */
+.summary-card, .price-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    border: 1px solid #edf2f7;
+    
+    h2 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #edf2f7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Billing Badges */
+.billing-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 30px;
+    
+    &.monthly {
+        background: #e6f7e6;
+        color: #22c55e;
+    }
+    
+    &.yearly {
+        background: #fff7e6;
+        color: #f59e0b;
+    }
+}
+
+/* Selected Plan */
+.selected-plan {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #e2e8f0;
+    
+    .plan-badge {
+        display: inline-block;
+        background: #0a2a44;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 30px;
+        font-size: 10px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    
+    .plan-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .plan-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .plan-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0a2a44;
+            
+            .price-period {
+                font-size: 11px;
+                font-weight: 400;
+                color: #64748b;
+                margin-left: 4px;
+            }
+        }
+    }
+}
+
+/* Selection Items */
+.selection-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf2f7;
+    
+    .selection-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        
+        .item-label {
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 13px;
+        }
+        
+        .item-price {
+            font-size: 11px;
+            color: #64748b;
+        }
+    }
+    
+    /* New counter row - amount in same line */
+    .counter-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .counter-control {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        
+        .counter-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #0a2a44;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            &:hover:not(:disabled) {
+                background: #0a2a44;
+                color: white;
+                border-color: #0a2a44;
+            }
+            
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+        
+        .counter-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            min-width: 28px;
+            text-align: center;
+        }
+    }
+    
+    .item-total {
+        font-weight: 600;
+        color: #0a2a44;
+        font-size: 14px;
+    }
+}
+
+/* Add-Ons Section */
+.addons-section {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf2f7;
+    
+    .addon-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        
+        h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            
+            .addon-badge {
+                font-size: 9px;
+                font-weight: 500;
+                color: #64748b;
+                background: #f1f5f9;
+                padding: 2px 6px;
+                border-radius: 30px;
+            }
+        }
+        
+        .addon-total-price {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0a2a44;
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 30px;
+        }
+    }
+    
+    .addon-item {
+        margin-bottom: 10px;
+        cursor: pointer;
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            
+            .checkmark {
+                position: relative;
+                height: 18px;
+                width: 18px;
+                background-color: #fff;
+                border: 2px solid #e2e8f0;
+                border-radius: 5px;
+                transition: all 0.2s;
+                display: inline-block;
+                flex-shrink: 0;
+                
+                &.checked {
+                    background-color: #0a2a44;
+                    border-color: #0a2a44;
+                    
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        left: 5px;
+                        top: 1px;
+                        width: 4px;
+                        height: 8px;
+                        border: solid white;
+                        border-width: 0 2px 2px 0;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+            
+            .addon-info {
+                .addon-name {
+                    font-weight: 500;
+                    color: #1e293b;
+                    font-size: 13px;
+                }
+                
+                .addon-desc {
+                    font-size: 10px;
+                    color: #64748b;
+                }
+            }
+        }
+    }
+    
+    .bundle-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 6px;
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #475569;
+            
+            i {
+                color: #cbd5e1;
+                font-size: 12px;
+                
+                &.active {
+                    color: #0a2a44;
+                }
+            }
+        }
+    }
+}
+
+/* Monthly Total */
+.monthly-total {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 2px solid #edf2f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    
+    .monthly-amount {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0a2a44;
+    }
+}
+
+/* Promo Code Section */
+.promo-section {
+    margin-bottom: 0;
+    
+    h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 8px;
+    }
+    
+    .promo-input-group {
+        display: flex;
+        gap: 8px;
+        
+        input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 12px;
+            
+            &:focus {
+                outline: none;
+                border-color: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+                box-shadow: 0 0 0 3px rgba(10, 42, 68, 0.1);
+            }
+        }
+        
+        .check-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            
+            &:hover {
+                background: #123b5c;
+            }
+        }
+    }
+    
+    .promo-message {
+        margin-top: 6px;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        
+        i.fa-check-circle {
+            color: #10b981;
+        }
+        
+        i.fa-times-circle {
+            color: #ef4444;
+        }
+    }
+}
+
+/* Price Breakdown */
+.price-list {
+    margin-bottom: 16px;
+    
+    .price-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        color: #475569;
+        font-size: 12px;
+        
+        &.subtotal {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 14px;
+        }
+        
+        &.gst {
+            color: #64748b;
+        }
+    }
+}
+
+.price-divider {
+    height: 1px;
+    background: #edf2f7;
+    margin: 12px 0;
+}
+
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0;
+    
+    .total-label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e293b;
+    }
+    
+    .total-value {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0a2a44;
+    }
+}
+
+.billing-note {
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #475569;
+    font-size: 11px;
+    
+    i {
+        color: #0a2a44;
+        font-size: 12px;
+    }
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    
+    .btn {
+        flex: 1;
+        padding: 10px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        
+        &-cancel {
+            background: white;
+            color: #000000;
+            border: 1px solid #e2e8f0;
+            
+            &:hover {
+                background: #c95258;
+            }
+        }
+        
+        &-proceed {
+           background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            
+            &:hover {
+                background: #49dd5d;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(10, 42, 68, 0.15);
+            }
+        }
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .order-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .order-wrapper {
+        padding: 16px;
+    }
+    
+    .header h1 {
+        color: linear-gradient(135deg, #1a237e 0%, #283593 100%);;
+        font-size: 22px;
+    }
+    
+    .summary-card, .price-card {
+        padding: 16px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .promo-input-group {
+        flex-direction: column;
+    }
+    
+    .bundle-features {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .counter-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+}
