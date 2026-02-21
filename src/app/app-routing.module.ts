@@ -16,6 +16,8 @@ import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { ModuleAccessComponent } from './module-access/module-access.component';
 import { TransportDashboardComponent } from './transport-dashboard/transport-dashboard.component';
+import { PolicyComponent } from './policy/policy.component';
+import { PaymentStatusComponent } from './phonePay/payment-status/payment-status.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,13 +36,14 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'user-creation', component: UserCreationComponent },
   { path: 'user-access', component: UserAccessComponent },
-  { path: 'module-access', component: ModuleAccessComponent }
-
+  { path: 'module-access', component: ModuleAccessComponent },
+  { path: 'policy', component: PolicyComponent },
+{ path: 'payment-status', component: PaymentStatusComponent }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

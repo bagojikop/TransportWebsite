@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   companyLinks = [
     { name: 'About Us', link: '#' },
     { name: 'Contact', link: '#' },
-    { name: 'Blog', link: '#' },
+    { name: 'policy', link: '/policy' },
     { name: 'Careers', link: '#' },
     { name: 'Support', link: '#' }
   ];

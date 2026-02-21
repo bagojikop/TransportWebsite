@@ -23,6 +23,9 @@ import { UserCreationComponent } from './user-creation/user-creation.component';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { ModuleAccessComponent } from './module-access/module-access.component';
 import { TransportDashboardComponent } from './transport-dashboard/transport-dashboard.component';
+import { PolicyComponent } from './policy/policy.component';
+import { PaymentStatusComponent } from './phonePay/payment-status/payment-status.component';
+import { PaymentRequestComponent } from './phonePay/payment-request/payment-request.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ UsersComponent,
 UserCreationComponent,
 UserAccessComponent,
 ModuleAccessComponent,
-TransportDashboardComponent  ],
+TransportDashboardComponent,
+PolicyComponent,
+PaymentStatusComponent,
+PaymentRequestComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
