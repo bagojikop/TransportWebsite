@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     users: '5 Users',
     price: '₹3,000',
     popular: false
-  }
+  },
 ];
  
 
