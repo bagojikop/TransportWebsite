@@ -226,6 +226,7 @@ onScheduleButtonClick(buttonType: string, event?: Event): void {
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
         button.style.transform = '';
+        this.router.navigate(['/user-register'],{state: { selectedPlan: planName }});
       }, 200);
     }
     
