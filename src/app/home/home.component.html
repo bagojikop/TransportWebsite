@@ -8,71 +8,30 @@
       </div>
       <ul class="nav-links" #navLinks [class.active]="mobileMenuOpen">
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('hero')"
-            class="nav-link"
-            >Home</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('hero')" class="nav-link">Home</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('features')"
-            class="nav-link"
-            >Features</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('features')" class="nav-link">Features</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('how-it-works')"
-            class="nav-link"
-            >How It Works</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('how-it-works')" class="nav-link">How It Works</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('about')"
-            class="nav-link"
-            >About Us</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('about')" class="nav-link">About Us</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('pricing')"
-            class="nav-link"
-            >Pricing</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('pricing')" class="nav-link">Pricing</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('demo')"
-            class="nav-link"
-            >Demo</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('demo')" class="nav-link">Demo</a>
         </li>
         <li>
-          <a
-            href="javascript:void(0)"
-            (click)="scrollToSection('contact')"
-            class="nav-link"
-            >Contact</a
-          >
+          <a href="javascript:void(0)" (click)="scrollToSection('contact')" class="nav-link">Contact</a>
         </li>
       </ul>
-      <button class="cta-button" routerLink="/login">
-         Login
-      </button>
+      <button class="cta-button" routerLink="/login">Login</button>
       <div class="mobile-menu-btn" (click)="toggleMobileMenu()">
-        <i
-          class="fas"
-          [class.fa-bars]="!mobileMenuOpen"
-          [class.fa-times]="mobileMenuOpen"
-        ></i>
+        <i class="fas" [class.fa-bars]="!mobileMenuOpen" [class.fa-times]="mobileMenuOpen"></i>
       </div>
     </nav>
   </div>
@@ -93,7 +52,7 @@
         <div class="hero-bullets">
           <div class="hero-bullet">
             <i class="fas fa-check-circle"></i>
-            <span>Built specially for  Distribution and Logistics Transporters</span>
+            <span>Built specially for Distribution and Logistics Transporters</span>
           </div>
           <div class="hero-bullet">
             <i class="fas fa-check-circle"></i>
@@ -114,29 +73,17 @@
         </div>
 
         <div class="hero-buttons">
-          <button
-            class="btn btn-primary"
-            (click)="onCtaButtonClick('ctaHeroButton', $event)"
-            routerLink="/user-register"
-          >
+          <button class="btn btn-primary" (click)="onCtaButtonClick('ctaHeroButton', $event)" routerLink="/user-register">
             <i class="fas fa-rocket"></i> Start Free Trial
           </button>
-          <button
-            class="btn btn-secondary"
-            (click)="onCtaButtonClick('videoButton', $event)"
-          >
+          <button class="btn btn-secondary" (click)="onCtaButtonClick('videoButton', $event)">
             <i class="fas fa-play"></i> Watch Demo (3 min)
           </button>
         </div>
       </div>
       <div class="hero-image">
-        <img
-          src="../../assets/banner.jpg"
-          alt="TransportPro ERP Dashboard"
-          #heroImage
-          (mouseenter)="onHeroImageHover(true)"
-          (mouseleave)="onHeroImageHover(false)"
-        />
+        <img src="../../assets/banner.jpg" alt="TransportPro ERP Dashboard" #heroImage
+          (mouseenter)="onHeroImageHover(true)" (mouseleave)="onHeroImageHover(false)" />
       </div>
     </div>
   </div>
@@ -147,10 +94,7 @@
   <div class="container">
     <div class="section-title">
       <h2>Core Transport Management Features</h2>
-      <p>
-        Everything you need to run your transport business efficiently - no
-        unnecessary extras.
-      </p>
+      <p>Everything you need to run your transport business efficiently - no unnecessary extras.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card" *ngFor="let feature of coreFeatures">
@@ -168,7 +112,7 @@
 <section class="section how-it-works" id="how-it-works">
   <div class="container">
     <div class="section-title">
-      <h2>How  DSSERP Works</h2>
+      <h2>How DSSERP Works</h2>
       <p>Simple setup. Easy to use. Designed for transport businesses.</p>
     </div>
 
@@ -183,14 +127,13 @@
 </section>
 
 <!-- About Us Section -->
-
 <section class="section about-us" id="about">
   <div class="container">
     <div class="section-title">
       <h2>About Us</h2>
       <p>More than two decades of excellence in software development</p>
     </div>
-    
+
     <div class="about-wrapper">
       <div class="about-content">
         <div class="about-text">
@@ -208,7 +151,7 @@
             Whether it's new development, system upgrades, or technical mentoring, contact us to realize your objectives.
           </p>
         </div>
-        
+
         <div class="about-stats">
           <div class="stat-item">
             <div class="stat-number">1997</div>
@@ -224,9 +167,9 @@
           </div>
         </div>
       </div>
-      
+
       <div class="about-image">
-        <img src="../../assets/aboutus.png" alt="Dynamic Super Software - Software Development Company" class="about-img">
+        <img src="../../assets/aboutus.png" alt="Dynamic Super Software" class="about-img">
       </div>
     </div>
   </div>
@@ -237,7 +180,7 @@
   <div class="container">
     <div class="section-title">
       <h2>Simple, Transparent Pricing</h2>
-      <p>Payment must be made yearly in advance.</p>
+      <p>Payment must be made yearly in advance. <span class="offer-tag">Offers Available</span></p>
     </div>
 
     <div class="pricing-grid four-cards">
@@ -251,12 +194,12 @@
             {{ plan.price }}<span class="pricing-period">/month</span>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="onPlanButtonClick(plan.name, $event)" >
+        <button class="btn btn-primary" (click)="onPlanButtonClick(plan.name, $event)">
           Place Order
         </button>
       </div>
 
-      <!-- Customize Plan Card - Professional Simple Design -->
+      <!-- Customize Plan Card -->
       <div class="pricing-card customize-card">
         <div class="customize-icon">
           <i class="fas fa-sliders-h"></i>
@@ -297,31 +240,23 @@
     </div>
   </div>
 </section>
+
 <!-- CTA Section -->
 <section class="cta-section" id="demo">
   <div class="container">
     <h2>Ready to Simplify Your Transport Business?</h2>
-    
 
     <div class="cta-buttons">
-      <button
-        class="btn btn-primary cta-button-main"
-        (click)="onCtaButtonClick('finalCtaButton', $event)"
-         routerLink="/login"
-      >
+      <button class="btn btn-primary cta-button-main" (click)="onCtaButtonClick('finalCtaButton', $event)" routerLink="/login">
         <i class="fas fa-play-circle"></i> Start Free 30-Day Trial
       </button>
-      <button
-        class="btn btn-secondary cta-button-alt"
-        (click)="onScheduleButtonClick('callButton', $event)"
-      >
-         Schedule a Demo
+      <button class="btn btn-secondary cta-button-alt" (click)="onScheduleButtonClick('callButton', $event)">
+        Schedule a Demo
       </button>
     </div>
 
     <div class="cta-footer">
-      <i class="fas fa-lock"></i> Your data is secure • No credit card required
-      for trial
+      <i class="fas fa-lock"></i> Your data is secure • No credit card required for trial
     </div>
   </div>
 </section>
@@ -334,23 +269,12 @@
         <div class="footer-logo" (click)="scrollToTop()">
           <i class="fas fa-truck-moving"></i> DSSERP
         </div>
-        <p>
-          Transport management software designed exclusively for transport
-          businesses. Focused on billing, operations, and administration.
-        </p>
+        <p>Transport management software designed exclusively for transport businesses. Focused on billing, operations, and administration.</p>
         <div class="social-links">
-          <a href="#" class="social-link">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="social-link">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="social-link">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="#" class="social-link">
-            <i class="fab fa-youtube"></i>
-          </a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
 
@@ -358,11 +282,7 @@
         <h3>Product</h3>
         <ul>
           <li *ngFor="let link of productLinks">
-            <a
-              href="javascript:void(0)"
-              (click)="scrollToSection(link.link.substring(1))"
-              >{{ link.name }}</a
-            >
+            <a href="javascript:void(0)" (click)="scrollToSection(link.link.substring(1))">{{ link.name }}</a>
           </li>
         </ul>
       </div>
@@ -379,25 +299,17 @@
       <div class="footer-links">
         <h3>Contact</h3>
         <ul>
-          <li>
-            <i class="fas fa-map-marker-alt"></i> Sangli,Maharashtra,India
-          </li>
+          <li><i class="fas fa-map-marker-alt"></i> Sangli, Maharashtra, India</li>
           <li><i class="fas fa-phone"></i> 91 8805011007</li>
           <li><i class="fas fa-envelope"></i> dssitck@gmail.com</li>
-          <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM </li>
+          <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
         </ul>
       </div>
     </div>
-
-    
   </div>
 </footer>
 
-<a
-  href="https://wa.me/message/BGDPLKZ3VDV3N1"
-  target="_blank"
-  class="whatsapp-float"
-  aria-label="Chat on WhatsApp"
->
+<!-- WhatsApp Float -->
+<a href="https://wa.me/message/BGDPLKZ3VDV3N1" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
