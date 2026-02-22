@@ -26,6 +26,7 @@ import { TransportDashboardComponent } from './transport-dashboard/transport-das
 import { PolicyComponent } from './policy/policy.component';
 import { PaymentStatusComponent } from './phonePay/payment-status/payment-status.component';
 import { PaymentRequestComponent } from './phonePay/payment-request/payment-request.component';
+import { OrderComponent } from './order/order.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ ModuleAccessComponent,
 TransportDashboardComponent,
 PolicyComponent,
 PaymentStatusComponent,
-PaymentRequestComponent  ],
+PaymentRequestComponent,
+OrderComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

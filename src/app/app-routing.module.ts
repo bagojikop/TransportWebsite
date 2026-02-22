@@ -18,6 +18,7 @@ import { ModuleAccessComponent } from './module-access/module-access.component';
 import { TransportDashboardComponent } from './transport-dashboard/transport-dashboard.component';
 import { PolicyComponent } from './policy/policy.component';
 import { PaymentStatusComponent } from './phonePay/payment-status/payment-status.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'user-access', component: UserAccessComponent },
   { path: 'module-access', component: ModuleAccessComponent },
   { path: 'policy', component: PolicyComponent },
-{ path: 'payment-status', component: PaymentStatusComponent }
+{ path: 'payment-status', component: PaymentStatusComponent },
+{ path: 'order',component:OrderComponent}
 
 ];
 
